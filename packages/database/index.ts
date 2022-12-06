@@ -1,2 +1,2 @@
 export * from "@prisma/client";
-export * from "./generated";
+export * as zod from "./generated";

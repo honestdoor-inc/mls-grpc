@@ -5,7 +5,7 @@
   "main": "./index.ts",
   "types": "./index.ts",
   "scripts": {
-    "db-generate": "prisma generate && npx cti ./generated",
+    "db-generate": "prisma generate",
     "db-push": "prisma db push --skip-generate",
     "clean": "rm -rf .turbo node_modules generated"
   },
@@ -17,8 +17,7 @@
     "zod": "^3.19.1"
   },
   "devDependencies": {
-    "create-ts-index": "^1.14.0",
     "prisma": "latest",
-    "prisma-zod-generator": "^0.8.2"
+    "zod-prisma": "^0.5.4"
   }
 }
