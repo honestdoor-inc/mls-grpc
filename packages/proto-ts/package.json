@@ -1,0 +1,18 @@
+{
+  "name": "@honestdoor/proto-ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "scripts": {
+    "build": "./bin/build-protos.sh",
+    "clean": "rm -rf .turbo node_modules out"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "grpc-tools": "^1.12.3",
+    "grpc_tools_node_protoc_ts": "^5.3.2"
+  }
+}

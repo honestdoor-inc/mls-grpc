@@ -1,0 +1,24 @@
+{
+  "name": "database",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "scripts": {
+    "db-generate": "prisma generate && npx cti ./generated",
+    "db-push": "prisma db push --skip-generate",
+    "clean": "rm -rf .turbo node_modules generated"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "latest",
+    "zod": "^3.19.1"
+  },
+  "devDependencies": {
+    "create-ts-index": "^1.14.0",
+    "prisma": "latest",
+    "prisma-zod-generator": "^0.8.2"
+  }
+}

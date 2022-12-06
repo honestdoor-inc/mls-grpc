@@ -1,0 +1,3022 @@
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+generator zod {
+    provider = "prisma-zod-generator"
+    output   = "../generated"
+}
+
+model Property {
+    id                                  String                          @id @unique @default(cuid())
+    aboveGradeFinishedArea              Float?
+    aboveGradeFinishedAreaSource        AreaSource?
+    aboveGradeFinishedAreaUnits         AreaUnits?
+    accessCode                          String?
+    accessibilityFeatures               String[]
+    additionalParcelsDescription        String?
+    additionalParcelsYn                 Boolean?
+    anchorsCoTenants                    String?
+    appliances                          Appliances[]
+    architecturalStyle                  String[]
+    associationAmenities                AssociationAmenities[]
+    associationFee                      Float?
+    associationFee2                     Float?
+    associationFee2Frequency            FeeFrequency?
+    associationFeeFrequency             FeeFrequency?
+    associationFeeIncludes              AssociationFeeIncludes[]
+    associationName                     String?
+    associationName2                    String?
+    associationPhone                    String?
+    associationPhone2                   String?
+    associationYn                       Boolean?
+    attachedGarageYn                    Boolean?
+    availabilityDate                    DateTime?
+    basement                            Basement[]
+    basementYn                          Boolean?
+    bathroomsFull                       Int?
+    bathroomsHalf                       Int?
+    bathroomsOneQuarter                 Int?
+    bathroomsPartial                    Int?
+    bathroomsThreeQuarter               Int?
+    bathroomsTotalInteger               Int?
+    bedroomsPossible                    Int?
+    bedroomsTotal                       Int?
+    belowGradeFinishedArea              Float?
+    belowGradeFinishedAreaSource        AreaSource?
+    belowGradeFinishedAreaUnits         AreaUnits?
+    bodyType                            BodyType[]
+    builderModel                        String?
+    builderName                         String?
+    buildingAreaSource                  AreaSource?
+    buildingAreaTotal                   Float?
+    buildingAreaUnits                   AreaUnits?
+    buildingFeatures                    String[]
+    buildingName                        String?
+    businessName                        String?
+    businessType                        BusinessType[]
+    buyerAgencyCompensation             String?
+    buyerAgencyCompensationType         CompensationType?
+    buyerAgentAor                       String?
+    buyerAgentDesignation               String[]
+    buyerAgentDirectPhone               String?
+    buyerAgentEmail                     String?
+    buyerAgentFax                       String?
+    buyerAgentFirstName                 String?
+    buyerAgentFullName                  String?
+    buyerAgentHomePhone                 String?
+    buyerAgentKey                       String?
+    buyerAgentKeyNumeric                Int?
+    buyerAgentLastName                  String?
+    buyerAgentMiddleName                String?
+    buyerAgentMlsId                     String?
+    buyerAgentMobilePhone               String?
+    buyerAgentNamePrefix                String?
+    buyerAgentNameSuffix                String?
+    buyerAgentOfficePhone               String?
+    buyerAgentOfficePhoneExt            String?
+    buyerAgentPager                     String?
+    buyerAgentPreferredPhone            String?
+    buyerAgentPreferredPhoneExt         String?
+    buyerAgentStateLicense              String?
+    buyerAgentTollFreePhone             String?
+    buyerAgentUrl                       String?
+    buyerAgentVoiceMail                 String?
+    buyerAgentVoiceMailExt              String?
+    buyerFinancing                      BuyerFinancing[]
+    buyerOfficeAor                      String?
+    buyerOfficeEmail                    String?
+    buyerOfficeFax                      String?
+    buyerOfficeKey                      String?
+    buyerOfficeKeyNumeric               Int?
+    buyerOfficeMlsId                    String?
+    buyerOfficeName                     String?
+    buyerOfficePhone                    String?
+    buyerOfficePhoneExt                 String?
+    buyerOfficeUrl                      String?
+    buyerTeamKey                        String?
+    buyerTeamKeyNumeric                 Int?
+    buyerTeamName                       String?
+    cableTvExpense                      Float?
+    cancellationDate                    DateTime?
+    capRate                             Float?
+    carportSpaces                       Float?
+    carportYn                           Boolean?
+    carrierRoute                        String?
+    city                                String?
+    cityRegion                          String?
+    closeDate                           DateTime?
+    closePrice                          Float?
+    coBuyerAgentAor                     String?
+    coBuyerAgentDesignation             String[]
+    coBuyerAgentDirectPhone             String?
+    coBuyerAgentEmail                   String?
+    coBuyerAgentFax                     String?
+    coBuyerAgentFirstName               String?
+    coBuyerAgentFullName                String?
+    coBuyerAgentHomePhone               String?
+    coBuyerAgentKey                     String?
+    coBuyerAgentKeyNumeric              Int?
+    coBuyerAgentLastName                String?
+    coBuyerAgentMiddleName              String?
+    coBuyerAgentMlsId                   String?
+    coBuyerAgentMobilePhone             String?
+    coBuyerAgentNamePrefix              String?
+    coBuyerAgentNameSuffix              String?
+    coBuyerAgentOfficePhone             String?
+    coBuyerAgentOfficePhoneExt          String?
+    coBuyerAgentPager                   String?
+    coBuyerAgentPreferredPhone          String?
+    coBuyerAgentPreferredPhoneExt       String?
+    coBuyerAgentStateLicense            String?
+    coBuyerAgentTollFreePhone           String?
+    coBuyerAgentUrl                     String?
+    coBuyerAgentVoiceMail               String?
+    coBuyerAgentVoiceMailExt            String?
+    coBuyerOfficeAor                    String?
+    coBuyerOfficeEmail                  String?
+    coBuyerOfficeFax                    String?
+    coBuyerOfficeKey                    String?
+    coBuyerOfficeKeyNumeric             Int?
+    coBuyerOfficeMlsId                  String?
+    coBuyerOfficeName                   String?
+    coBuyerOfficePhone                  String?
+    coBuyerOfficePhoneExt               String?
+    coBuyerOfficeUrl                    String?
+    coListAgentAor                      String?
+    coListAgentDesignation              String[]
+    coListAgentDirectPhone              String?
+    coListAgentEmail                    String?
+    coListAgentFax                      String?
+    coListAgentFirstName                String?
+    coListAgentFullName                 String?
+    coListAgentHomePhone                String?
+    coListAgentKey                      String?
+    coListAgentKeyNumeric               Int?
+    coListAgentLastName                 String?
+    coListAgentMiddleName               String?
+    coListAgentMlsId                    String?
+    coListAgentMobilePhone              String?
+    coListAgentNamePrefix               String?
+    coListAgentNameSuffix               String?
+    coListAgentOfficePhone              String?
+    coListAgentOfficePhoneExt           String?
+    coListAgentPager                    String?
+    coListAgentPreferredPhone           String?
+    coListAgentPreferredPhoneExt        String?
+    coListAgentStateLicense             String?
+    coListAgentTollFreePhone            String?
+    coListAgentUrl                      String?
+    coListAgentVoiceMail                String?
+    coListAgentVoiceMailExt             String?
+    coListOfficeAor                     String?
+    coListOfficeEmail                   String?
+    coListOfficeFax                     String?
+    coListOfficeKey                     String?
+    coListOfficeKeyNumeric              Int?
+    coListOfficeMlsId                   String?
+    coListOfficeName                    String?
+    coListOfficePhone                   String?
+    coListOfficePhoneExt                String?
+    coListOfficeUrl                     String?
+    commonInterest                      CommonInterest?
+    commonWalls                         CommonWalls[]
+    communityFeatures                   CommunityFeatures[]
+    concessions                         Concessions?
+    concessionsAmount                   Int?
+    concessionsComments                 String?
+    constructionMaterials               ConstructionMaterials[]
+    continentRegion                     String?
+    contingency                         String?
+    contingentDate                      DateTime?
+    contractStatusChangeDate            DateTime?
+    cooling                             Cooling[]
+    coolingYn                           Boolean?
+    copyrightNotice                     String?
+    country                             Country?
+    countryRegion                       String?
+    countyOrParish                      String?
+    coveredSpaces                       Float?
+    cropsIncludedYn                     Boolean?
+    crossStreet                         String?
+    cultivatedArea                      Float?
+    cumulativeDaysOnMarket              Int?
+    currentFinancing                    CurrentFinancing[]
+    currentUse                          String[]
+    doh1                                String?
+    doh2                                String?
+    doh3                                String?
+    daysOnMarket                        Int?
+    developmentStatus                   String[]
+    directionFaces                      DirectionFaces?
+    directions                          String?
+    disclaimer                          String?
+    disclosures                         String[]
+    distanceToBusComments               String?
+    distanceToBusNumeric                Int?
+    distanceToBusUnits                  LinearUnits?
+    distanceToElectricComments          String?
+    distanceToElectricNumeric           Int?
+    distanceToElectricUnits             LinearUnits?
+    distanceToFreewayComments           String?
+    distanceToFreewayNumeric            Int?
+    distanceToFreewayUnits              LinearUnits?
+    distanceToGasComments               String?
+    distanceToGasNumeric                Int?
+    distanceToGasUnits                  LinearUnits?
+    distanceToPhoneServiceComments      String?
+    distanceToPhoneServiceNumeric       Int?
+    distanceToPhoneServiceUnits         LinearUnits?
+    distanceToPlaceofWorshipComments    String?
+    distanceToPlaceofWorshipNumeric     Int?
+    distanceToPlaceofWorshipUnits       LinearUnits?
+    distanceToSchoolBusComments         String?
+    distanceToSchoolBusNumeric          Int?
+    distanceToSchoolBusUnits            LinearUnits?
+    distanceToSchoolsComments           String?
+    distanceToSchoolsNumeric            Int?
+    distanceToSchoolsUnits              LinearUnits?
+    distanceToSewerComments             String?
+    distanceToSewerNumeric              Int?
+    distanceToSewerUnits                LinearUnits?
+    distanceToShoppingComments          String?
+    distanceToShoppingNumeric           Int?
+    distanceToShoppingUnits             LinearUnits?
+    distanceToStreetComments            String?
+    distanceToStreetNumeric             Int?
+    distanceToStreetUnits               LinearUnits?
+    distanceToWaterComments             String?
+    distanceToWaterNumeric              Int?
+    distanceToWaterUnits                LinearUnits?
+    documentsAvailable                  String[]
+    documentsChangeTimestamp            DateTime?
+    documentsCount                      Int?
+    doorFeatures                        DoorFeatures[]
+    dualVariableCompensationYn          Boolean?
+    electric                            Electric[]
+    electricExpense                     Float?
+    electricOnPropertyYn                Boolean?
+    elementarySchool                    String?
+    elementarySchoolDistrict            String?
+    elevation                           Int?
+    elevationUnits                      LinearUnits?
+    entryLevel                          Int?
+    entryLocation                       String?
+    exclusions                          String?
+    existingLeaseType                   ExistingLeaseType[]
+    expirationDate                      DateTime?
+    exteriorFeatures                    ExteriorFeatures[]
+    farmCreditServiceInclYn             Boolean?
+    farmLandAreaSource                  AreaSource?
+    farmLandAreaUnits                   AreaUnits?
+    fencing                             String[]
+    financialDataSource                 FinancialDataSource[]
+    fireplaceFeatures                   FireplaceFeatures[]
+    fireplaceYn                         Boolean?
+    fireplacesTotal                     Int?
+    flooring                            Flooring[]
+    foundationArea                      Float?
+    foundationDetails                   FoundationDetails[]
+    frontageLength                      String?
+    frontageType                        String[]
+    fuelExpense                         Float?
+    furnished                           Furnished?
+    furnitureReplacementExpense         Float?
+    garageSpaces                        Float?
+    garageYn                            Boolean?
+    gardenerExpense                     Float?
+    grazingPermitsBlmYn                 Boolean?
+    grazingPermitsForestServiceYn       Boolean?
+    grazingPermitsPrivateYn             Boolean?
+    greenBuildingVerification           String[]
+    greenBuildingVerificationType       GreenBuildingVerificationType[]
+    greenEnergyEfficient                GreenEnergyEfficient[]
+    greenEnergyGeneration               GreenEnergyGeneration[]
+    greenIndoorAirQuality               GreenIndoorAirQuality[]
+    greenLocation                       String[]
+    greenSustainability                 GreenSustainability[]
+    greenWaterConservation              GreenWaterConservation[]
+    grossIncome                         Float?
+    grossScheduledIncome                Float?
+    habitableResidenceYn                Boolean?
+    heating                             Heating[]
+    heatingYn                           Boolean?
+    highSchool                          String?
+    highSchoolDistrict                  String?
+    homeWarrantyYn                      Boolean?
+    horseAmenities                      HorseAmenities[]
+    horseYn                             Boolean?
+    hoursDaysOfOperation                HoursDaysOfOperation[]
+    hoursDaysOfOperationDescription     String?
+    inclusions                          String?
+    incomeIncludes                      IncomeIncludes[]
+    insuranceExpense                    Float?
+    interiorFeatures                    InteriorOrRoomFeatures[]
+    internetAddressDisplayYn            Boolean?
+    internetAutomatedValuationDisplayYn Boolean?
+    internetConsumerCommentYn           Boolean?
+    internetEntireListingDisplayYn      Boolean?
+    irrigationSource                    String[]
+    irrigationWaterRightsAcres          Float?
+    irrigationWaterRightsYn             Boolean?
+    laborInformation                    String[]
+    landLeaseAmount                     Float?
+    landLeaseAmountFrequency            FeeFrequency?
+    landLeaseExpirationDate             DateTime?
+    landLeaseYn                         Boolean?
+    latitude                            Float?
+    laundryFeatures                     LaundryFeatures[]
+    leasableArea                        Float?
+    leasableAreaUnits                   AreaUnits?
+    leaseAmount                         Float?
+    leaseAmountFrequency                FeeFrequency?
+    leaseAssignableYn                   Boolean?
+    leaseConsideredYn                   Boolean?
+    leaseExpiration                     DateTime?
+    leaseRenewalCompensation            LeaseRenewalCompensation[]
+    leaseRenewalOptionYn                Boolean?
+    leaseTerm                           LeaseTerm?
+    levels                              Levels[]
+    license1                            String?
+    license2                            String?
+    license3                            String?
+    licensesExpense                     Float?
+    listAor                             String?
+    listAgentAor                        String?
+    listAgentDesignation                String[]
+    listAgentDirectPhone                String?
+    listAgentEmail                      String?
+    listAgentFax                        String?
+    listAgentFirstName                  String?
+    listAgentFullName                   String?
+    listAgentHomePhone                  String?
+    listAgentKey                        String?
+    listAgentKeyNumeric                 Int?
+    listAgentLastName                   String?
+    listAgentMiddleName                 String?
+    listAgentMlsId                      String?
+    listAgentMobilePhone                String?
+    listAgentNamePrefix                 String?
+    listAgentNameSuffix                 String?
+    listAgentOfficePhone                String?
+    listAgentOfficePhoneExt             String?
+    listAgentPager                      String?
+    listAgentPreferredPhone             String?
+    listAgentPreferredPhoneExt          String?
+    listAgentStateLicense               String?
+    listAgentTollFreePhone              String?
+    listAgentUrl                        String?
+    listAgentVoiceMail                  String?
+    listAgentVoiceMailExt               String?
+    listOfficeAor                       String?
+    listOfficeEmail                     String?
+    listOfficeFax                       String?
+    listOfficeKey                       String?
+    listOfficeKeyNumeric                Int?
+    listOfficeMlsId                     String?
+    listOfficeName                      String?
+    listOfficePhone                     String?
+    listOfficePhoneExt                  String?
+    listOfficeUrl                       String?
+    listPrice                           Float?
+    listPriceLow                        Float?
+    listTeamKey                         String?
+    listTeamKeyNumeric                  Int?
+    listTeamName                        String?
+    listingAgreement                    ListingAgreement?
+    listingContractDate                 DateTime?
+    listingId                           String?
+    listingKey                          String?                         @unique
+    listingKeyNumeric                   Int?
+    listingService                      ListingService?
+    listingTerms                        ListingTerms[]
+    livingArea                          Float?
+    livingAreaSource                    AreaSource?
+    livingAreaUnits                     AreaUnits?
+    lockBoxLocation                     String?
+    lockBoxSerialNumber                 String?
+    lockBoxType                         LockBoxType[]
+    longitude                           Float?
+    lotDimensionsSource                 String?
+    lotFeatures                         LotFeatures[]
+    lotSizeAcres                        Float?
+    lotSizeArea                         Float?
+    lotSizeDimensions                   String?
+    lotSizeSource                       String?
+    lotSizeSquareFeet                   Float?
+    lotSizeUnits                        LotSizeUnits?
+    mlsAreaMajor                        String?
+    mlsAreaMinor                        String?
+    mainLevelBathrooms                  Int?
+    mainLevelBedrooms                   Int?
+    maintenanceExpense                  Float?
+    majorChangeTimestamp                DateTime?
+    majorChangeType                     ChangeType?
+    make                                String?
+    managerExpense                      Float?
+    mapCoordinate                       String?
+    mapCoordinateSource                 String?
+    mapUrl                              String?
+    middleOrJuniorSchool                String?
+    middleOrJuniorSchoolDistrict        String?
+    mlsStatus                           String?
+    mobileDimUnits                      LinearUnits?
+    mobileHomeRemainsYn                 Boolean?
+    mobileLength                        Int?
+    mobileWidth                         Int?
+    model                               String?
+    modificationTimestamp               DateTime?
+    netOperatingIncome                  Float?
+    newConstructionYn                   Boolean?
+    newTaxesExpense                     Float?
+    numberOfBuildings                   Int?
+    numberOfFullTimeEmployees           Int?
+    numberOfLots                        Int?
+    numberOfPads                        Int?
+    numberOfPartTimeEmployees           Int?
+    numberOfSeparateElectricMeters      Int?
+    numberOfSeparateGasMeters           Int?
+    numberOfSeparateWaterMeters         Int?
+    numberOfUnitsInCommunity            Int?
+    numberOfUnitsLeased                 Int?
+    numberOfUnitsMoMo                   Int?
+    numberOfUnitsTotal                  Int?
+    numberOfUnitsVacant                 Int?
+    occupantName                        String?
+    occupantPhone                       String?
+    occupantType                        OccupantType?
+    offMarketDate                       DateTime?
+    offMarketTimestamp                  DateTime?
+    onMarketDate                        DateTime?
+    onMarketTimestamp                   DateTime?
+    openParkingSpaces                   Float?
+    openParkingYn                       Boolean?
+    operatingExpense                    Float?
+    operatingExpenseIncludes            OperatingExpenseIncludes[]
+    originalEntryTimestamp              DateTime?
+    originalListPrice                   Float?
+    originatingSystemId                 String?
+    originatingSystemKey                String?
+    originatingSystemName               String?
+    otherEquipment                      OtherEquipment[]
+    otherExpense                        Float?
+    otherParking                        String?
+    otherStructures                     String[]
+    ownerName                           String?
+    ownerPays                           OwnerPays[]
+    ownerPhone                          String?
+    ownership                           String?
+    ownershipType                       OwnershipType?
+    parcelNumber                        String?
+    parkManagerName                     String?
+    parkManagerPhone                    String?
+    parkName                            String?
+    parkingFeatures                     ParkingFeatures[]
+    parkingTotal                        Float?
+    pastureArea                         Float?
+    patioAndPorchFeatures               PatioAndPorchFeatures[]
+    pendingTimestamp                    DateTime?
+    pestControlExpense                  Float?
+    petsAllowed                         PetsAllowed[]
+    photosChangeTimestamp               DateTime?
+    photosCount                         Int?
+    poolExpense                         Float?
+    poolFeatures                        PoolFeatures[]
+    poolPrivateYn                       Boolean?
+    possession                          Possession[]
+    possibleUse                         String[]
+    postalCity                          String?
+    postalCode                          String?
+    postalCodePlus4                     String?
+    powerProduction                     String[]
+    powerProductionType                 PowerProductionType[]
+    previousListPrice                   Float?
+    priceChangeTimestamp                DateTime?
+    privateOfficeRemarks                String?
+    privateRemarks                      String?
+    professionalManagementExpense       Float?
+    propertyAttachedYn                  Boolean?
+    propertyCondition                   PropertyCondition[]
+    propertySubType                     PropertySubType?
+    propertyType                        PropertyType?
+    publicRemarks                       String?
+    publicSurveyRange                   String?
+    publicSurveySection                 String?
+    publicSurveyTownship                String?
+    purchaseContractDate                DateTime?
+    rvParkingDimensions                 String?
+    rangeArea                           Float?
+    rentControlYn                       Boolean?
+    rentIncludes                        RentIncludes[]
+    roadFrontageType                    String[]
+    roadResponsibility                  String[]
+    roadSurfaceType                     String[]
+    roof                                Roof[]
+    roomType                            RoomType[]
+    rooms                               String[]
+    roomsTotal                          Int?
+    seatingCapacity                     Int?
+    securityFeatures                    SecurityFeatures[]
+    seniorCommunityYn                   Boolean?
+    serialU                             String?
+    serialX                             String?
+    serialXx                            String?
+    sewer                               Sewer[]
+    showingAdvanceNotice                Int?
+    showingAttendedYn                   Boolean?
+    showingContactName                  String?
+    showingContactPhone                 String?
+    showingContactPhoneExt              String?
+    showingContactType                  ShowingContactType[]
+    showingDays                         String[]
+    showingEndTime                      DateTime?
+    showingInstructions                 String?
+    showingRequirements                 ShowingRequirements[]
+    showingStartTime                    DateTime?
+    signOnPropertyYn                    Boolean?
+    skirt                               Skirt[]
+    sourceSystemId                      String?
+    sourceSystemKey                     String?
+    sourceSystemName                    String?
+    spaFeatures                         SpaFeatures[]
+    spaYn                               Boolean?
+    specialLicenses                     SpecialLicenses[]
+    specialListingConditions            SpecialListingConditions[]
+    standardStatus                      StandardStatus?
+    stateOrProvince                     StateOrProvince?
+    stateRegion                         String?
+    statusChangeTimestamp               DateTime?
+    stories                             Int?
+    storiesTotal                        Int?
+    streetAdditionalInfo                String?
+    streetDirPrefix                     StreetDirection?
+    streetDirSuffix                     StreetDirection?
+    streetName                          String?
+    streetNumber                        String?
+    streetNumberNumeric                 Int?
+    streetSuffix                        String?
+    streetSuffixModifier                String?
+    structureType                       StructureType[]
+    subAgencyCompensation               String?
+    subAgencyCompensationType           CompensationType?
+    subdivisionName                     String?
+    suppliesExpense                     Float?
+    syndicateTo                         String[]
+    syndicationRemarks                  String?
+    taxAnnualAmount                     Float?
+    taxAssessedValue                    Int?
+    taxBlock                            String?
+    taxBookNumber                       String?
+    taxLegalDescription                 String?
+    taxLot                              String?
+    taxMapNumber                        String?
+    taxOtherAnnualAssessmentAmount      Float?
+    taxParcelLetter                     String?
+    taxStatusCurrent                    String[]
+    taxTract                            String?
+    taxYear                             Int?
+    tenantPays                          TenantPays[]
+    topography                          String?
+    totalActualRent                     Float?
+    township                            String?
+    transactionBrokerCompensation       String?
+    transactionBrokerCompensationType   CompensationType?
+    trashExpense                        Float?
+    unitNumber                          String?
+    unitTypeType                        String[]
+    unitTypes                           String[]
+    unitsFurnished                      String?
+    universalPropertyId                 String?
+    universalPropertySubId              String?
+    unparsedAddress                     String?
+    utilities                           Utilities[]
+    vacancyAllowance                    Int?
+    vacancyAllowanceRate                Float?
+    vegetation                          String[]
+    videosChangeTimestamp               DateTime?
+    videosCount                         Int?
+    view                                View[]
+    viewYn                              Boolean?
+    virtualTourUrlBranded               String?
+    virtualTourUrlUnbranded             String?
+    walkScore                           Int?
+    waterBodyName                       String?
+    waterSewerExpense                   Float?
+    waterSource                         WaterSource[]
+    waterfrontFeatures                  WaterfrontFeatures[]
+    waterfrontYn                        Boolean?
+    windowFeatures                      WindowFeatures[]
+    withdrawnDate                       DateTime?
+    woodedArea                          Float?
+    workmansCompensationExpense         Float?
+    yearBuilt                           Int?
+    yearBuiltDetails                    String?
+    yearBuiltEffective                  Int?
+    yearBuiltSource                     YearBuiltSource?
+    yearEstablished                     Int?
+    yearsCurrentOwner                   Int?
+    zoning                              String?
+    zoningDescription                   String?
+
+    media Media[]
+
+    @@map("property")
+}
+
+model Media {
+    id                         String         @id @unique @default(cuid())
+    changedByMemberId          String?
+    changedByMemberKey         String?
+    changedByMemberKeyNumeric  Int?
+    className                  ClassName?
+    imageHeight                Int?
+    imageOf                    ImageOf?
+    imageSizeDescription       String?
+    imageWidth                 Int?
+    longDescription            String?
+    mediaCategory              MediaCategory?
+    mediaHtml                  String?
+    mediaKey                   String?
+    mediaKeyNumeric            Int?
+    mediaModificationTimestamp DateTime?
+    mediaObjectId              String?
+    mediaStatus                String?
+    mediaType                  MediaType?
+    mediaUrl                   String?
+    modificationTimestamp      DateTime?
+    order                      Int?
+    originatingSystemId        String?
+    originatingSystemMediaKey  String?
+    originatingSystemName      String?
+    permission                 String[]
+    preferredPhotoYn           Boolean?
+    resourceName               ResourceName?
+    resourceRecordId           String?
+    resourceRecordKey          String?
+    resourceRecordKeyNumeric   Int?
+    shortDescription           String?
+    sourceSystemId             String?
+    sourceSystemMediaKey       String?
+    sourceSystemName           String?
+
+    propertyId String
+    property   Property @relation(fields: [propertyId], references: [id])
+
+    @@unique([order, resourceRecordKey])
+    @@map("media")
+}
+
+enum AreaSource {
+    APPRAISER
+    ASSESSOR
+    BUILDER
+    ESTIMATED
+    OTHER
+    OWNER
+    PLANS
+    PUBLIC_RECORDS
+    SEE_REMARKS
+}
+
+enum AreaUnits {
+    SQUARE_FEET
+    SQUARE_METERS
+}
+
+enum Appliances {
+    BAR_FRIDGE
+    BUILT_IN_ELECTRIC_OVEN
+    BUILT_IN_ELECTRIC_RANGE
+    BUILT_IN_FREEZER
+    BUILT_IN_GAS_OVEN
+    BUILT_IN_GAS_RANGE
+    BUILT_IN_RANGE
+    BUILT_IN_REFRIGERATOR
+    CONVECTION_OVEN
+    COOKTOP
+    DISHWASHER
+    DISPOSAL
+    DOUBLE_OVEN
+    DOWN_DRAFT
+    DRYER
+    ELECTRIC_COOKTOP
+    ELECTRIC_OVEN
+    ELECTRIC_RANGE
+    ELECTRIC_WATER_HEATER
+    ENERGY_STAR_QUALIFIED_APPLIANCES
+    ENERGY_STAR_QUALIFIED_DISHWASHER
+    ENERGY_STAR_QUALIFIED_DRYER
+    ENERGY_STAR_QUALIFIED_FREEZER
+    ENERGY_STAR_QUALIFIED_REFRIGERATOR
+    ENERGY_STAR_QUALIFIED_WASHER
+    ENERGY_STAR_QUALIFIED_WATER_HEATER
+    EXHAUST_FAN
+    FREE_STANDING_ELECTRIC_OVEN
+    FREE_STANDING_ELECTRIC_RANGE
+    FREE_STANDING_FREEZER
+    FREE_STANDING_GAS_OVEN
+    FREE_STANDING_GAS_RANGE
+    FREE_STANDING_RANGE
+    FREE_STANDING_REFRIGERATOR
+    FREEZER
+    GAS_COOKTOP
+    GAS_OVEN
+    GAS_RANGE
+    GAS_WATER_HEATER
+    HUMIDIFIER
+    ICE_MAKER
+    INDOOR_GRILL
+    INDUCTION_COOKTOP
+    INSTANT_HOT_WATER
+    MICROWAVE
+    NONE
+    OTHER
+    OVEN
+    PLUMBED_FOR_ICE_MAKER
+    PORTABLE_DISHWASHER
+    PROPANE_COOKTOP
+    RANGE
+    RANGE_HOOD
+    REFRIGERATOR
+    SELF_CLEANING_OVEN
+    SOLAR_HOT_WATER
+    STAINLESS_STEEL_APPLIANCES
+    TANKLESS_WATER_HEATER
+    TRASH_COMPACTOR
+    VENTED_EXHAUST_FAN
+    WARMING_DRAWER
+    WASHER
+    WASHER_DRYER
+    WASHER_DRYER_STACKED
+    WATER_HEATER
+    WATER_PURIFIER
+    WATER_PURIFIER_OWNED
+    WATER_PURIFIER_RENTED
+    WATER_SOFTENER
+    WATER_SOFTENER_OWNED
+    WATER_SOFTENER_RENTED
+    WINE_COOLER
+    WINE_REFRIGERATOR
+}
+
+enum AssociationAmenities {
+    AIRPORT_RUNWAY
+    BARBECUE
+    BASKETBALL_COURT
+    BEACH_ACCESS
+    BEACH_RIGHTS
+    BILLIARD_ROOM
+    BOAT_DOCK
+    BOATING
+    BOAT_SLIP
+    CABANA
+    CABLE_TV
+    CAR_WASH_AREA
+    CLUBHOUSE
+    COIN_LAUNDRY
+    CONCIERGE
+    DAY_CARE
+    DOG_PARK
+    DRY_DOCK
+    ELECTRICITY
+    ELEVATORS
+    EXERCISE_COURSE
+    FITNESS_CENTER
+    GAME_COURT_EXTERIOR
+    GAME_COURT_INTERIOR
+    GAME_ROOM
+    GAS
+    GATED
+    GOLF_COURSE
+    HOT_WATER
+    INDOOR_POOL
+    INSURANCE
+    JOGGING_PATH
+    LANDSCAPING
+    LAUNDRY
+    MAID_SERVICE
+    MAINTENANCE
+    MAINTENANCE_GROUNDS
+    MAINTENANCE_STRUCTURE
+    MANAGEMENT
+    MARINA
+    MEETING_ROOM
+    NONE
+    OTHER
+    PARK
+    PARKING
+    PARTY_ROOM
+    PICNIC_AREA
+    PLAYGROUND
+    POND_SEASONAL
+    POND_YEAR_ROUND
+    POOL
+    POWERED_BOATS_ALLOWED
+    RACQUETBALL
+    RECREATION_FACILITIES
+    RECREATION_ROOM
+    ROOF_DECK
+    RV_BOAT_STORAGE
+    RV_PARKING
+    SAUNA
+    SECURITY
+    SERVICE_ELEVATORS
+    SHUFFLEBOARD_COURT
+    SKI_ACCESSIBLE
+    SNOW_REMOVAL
+    SPA_HOT_TUB
+    SPORT_COURT
+    STABLES
+    STORAGE
+    STREAM_SEASONAL
+    STREAM_YEAR_ROUND
+    TAXES
+    TENNIS_COURTS
+    TRAILS
+    TRASH
+    WATER
+    WORKSHOP_AREA
+}
+
+enum FeeFrequency {
+    ANNUALLY
+    BI_MONTHLY
+    BI_WEEKLY
+    DAILY
+    MONTHLY
+    ONE_TIME
+    QUARTERLY
+    SEASONAL
+    SEMI_ANNUALLY
+    SEMI_MONTHLY
+    WEEKLY
+}
+
+enum AssociationFeeIncludes {
+    CABLE_TV
+    EARTHQUAKE_INSURANCE
+    ELECTRICITY
+    GAS
+    INSURANCE
+    INTERNET
+    MAINTENANCE_GROUNDS
+    MAINTENANCE_STRUCTURE
+    PEST_CONTROL
+    SECURITY
+    SEWER
+    SNOW_REMOVAL
+    TRASH
+    UTILITIES
+    WATER
+}
+
+enum Basement {
+    APARTMENT
+    BATH_STUBBED
+    BLOCK
+    CONCRETE
+    CRAWL_SPACE
+    DAYLIGHT
+    DIRT_FLOOR
+    EXTERIOR_ENTRY
+    FINISHED
+    FRENCH_DRAIN
+    FULL
+    INTERIOR_ENTRY
+    NONE
+    OTHER
+    PARTIAL
+    PARTIALLY_FINISHED
+    STORAGE_SPACE
+    SUMP_PUMP
+    UNFINISHED
+    WALK_OUT_ACCESS
+    WALK_UP_ACCESS
+}
+
+enum BodyType {
+    DOUBLE_WIDE
+    EXPANDO
+    OTHER
+    QUAD_WIDE
+    SEE_REMARKS
+    SINGLE_WIDE
+    TRIPLE_WIDE
+}
+
+enum BusinessType {
+    ACCOUNTING
+    ADMINISTRATIVE_AND_SUPPORT
+    ADVERTISING
+    AGRICULTURE
+    ANIMAL_GROOMING
+    APPLIANCES
+    AQUARIUM_SUPPLIES
+    ARTS_AND_ENTERTAINMENT
+    ATHLETIC
+    AUTO_BODY
+    AUTO_DEALER
+    AUTO_GLASS
+    AUTO_PARTS
+    AUTO_RENT_LEASE
+    AUTO_REPAIR_SPECIALTY
+    AUTO_SERVICE
+    AUTO_STEREO_ALARM
+    AUTO_TIRES
+    AUTO_WRECKING
+    BAKERY
+    BARBER_BEAUTY
+    BAR_TAVERN_LOUNGE
+    BED_AND_BREAKFAST
+    BOOKS_CARDS_STATIONARY
+    BUTCHER
+    CABINETS
+    CANDY_COOKIE
+    CARPET_TILE
+    CAR_WASH
+    CHILD_CARE
+    CHURCH
+    CLOTHING
+    COMMERCIAL
+    COMPUTER
+    CONSTRUCTION_CONTRACTOR
+    CONVALESCENT
+    CONVENIENCE_STORE
+    DANCE_STUDIO
+    DECORATOR
+    DELI_CATERING
+    DENTAL
+    DISTRIBUTION
+    DOUGHNUT
+    DRUGSTORE
+    DRY_CLEANER
+    EDUCATION_SCHOOL
+    ELECTRONICS
+    EMPLOYMENT
+    FARM
+    FAST_FOOD
+    FINANCIAL
+    FITNESS
+    FLORIST_NURSERY
+    FOOD_AND_BEVERAGE
+    FOREST_RESERVE
+    FRANCHISE
+    FURNITURE
+    GAS_STATION
+    GIFT_SHOP
+    GROCERY
+    HARDWARE
+    HEALTH_FOOD
+    HEALTH_SERVICES
+    HOBBY
+    HOME_CLEANER
+    HOSPITALITY
+    HOTEL_MOTEL
+    ICE_CREAM_FROZEN_YOGURT
+    INDUSTRIAL
+    JEWELRY
+    LANDSCAPING
+    LAUNDROMAT
+    LIQUOR_STORE
+    LOCKSMITH
+    MANUFACTURING
+    MEDICAL
+    MIXED
+    MOBILE_TRAILER_PARK
+    MUSIC
+    NURSING_HOME
+    OFFICE_SUPPLY
+    OTHER
+    PAINTS
+    PARKING
+    PET_STORE
+    PHOTOGRAPHER
+    PIZZA
+    PRINTING
+    PROFESSIONAL_OFFICE
+    PROFESSIONAL_SERVICE
+    REAL_ESTATE
+    RECREATION
+    RENTAL
+    RESIDENTIAL
+    RESTAURANT
+    RETAIL
+    SADDLERY_HARNESS
+    SPORTING_GOODS
+    STORAGE
+    TOYS
+    TRANSPORTATION
+    TRAVEL
+    UPHOLSTERY
+    UTILITY
+    VARIETY
+    VIDEO
+    WALLPAPER
+    WAREHOUSE
+    WHOLESALE
+}
+
+enum CompensationType {
+    DOLLARS
+    OTHER
+    PERCENT
+    SEE_REMARKS
+}
+
+enum BuyerFinancing {
+    ASSUMED
+    CASH
+    CONTRACT
+    CONVENTIONAL
+    FHA
+    FHA_203_B
+    FHA_203_K
+    OTHER
+    PRIVATE
+    SELLER_FINANCING
+    TRUST_DEED
+    USDA
+    VA
+}
+
+enum CommonInterest {
+    COMMUNITY_APARTMENT
+    CONDOMINIUM
+    NONE
+    PLANNED_DEVELOPMENT
+    STOCK_COOPERATIVE
+    TIMESHARE
+}
+
+enum CommonWalls {
+    END_UNIT
+    NO_COMMON_WALLS
+    NO_ONE_ABOVE
+    NO_ONE_BELOW
+    ONE_COMMON_WALL
+    TWO_OR_MORE_COMMON_WALLS
+}
+
+enum CommunityFeatures {
+    AIRPORT_RUNWAY
+    CLUBHOUSE
+    CURBS
+    FISHING
+    FITNESS_CENTER
+    GATED
+    GOLF
+    LAKE
+    NONE
+    OTHER
+    PARK
+    PLAYGROUND
+    POOL
+    RACQUETBALL
+    RESTAURANT
+    SIDEWALKS
+    STABLES
+    STREET_LIGHTS
+    SUBURBAN
+    TENNIS_COURTS
+}
+
+enum Concessions {
+    CALL_LISTING_AGENT
+    NO
+    YES
+}
+
+enum ConstructionMaterials {
+    ADOBE
+    ALUMINUM_SIDING
+    ASBESTOS
+    ASPHALT
+    ATTIC_CRAWL_HATCHWAYS_INSULATED
+    BATTS_INSULATION
+    BLOCK
+    BLOWN_IN_INSULATION
+    BOARD_AND_BATTEN_SIDING
+    BRICK
+    BRICK_VENEER
+    CEDAR
+    CEMENT_SIDING
+    CLAPBOARD
+    CONCRETE
+    DUCTS_PROFESSIONALLY_AIR_SEALED
+    EXTERIOR_DUCT_WORK_IS_INSULATED
+    FIBER_CEMENT
+    FIBERGLASS_SIDING
+    FOAM_INSULATION
+    FRAME
+    GLASS
+    HARDIPLANK_TYPE
+    ICAT_RECESSED_LIGHTING
+    INSULATED_CONCRETE_FORMS
+    LAP_SIDING
+    LOG
+    LOG_SIDING
+    LOW_VOC_INSULATION
+    MASONITE
+    METAL_SIDING
+    NATURAL_BUILDING
+    OTHER
+    PLASTER
+    RADIANT_BARRIER
+    RAMMED_EARTH
+    RECYCLED_BIO_BASED_INSULATION
+    REDWOOD_SIDING
+    SEE_REMARKS
+    SHAKE_SIDING
+    SHINGLE_SIDING
+    SLUMP_BLOCK
+    SPRAY_FOAM_INSULATION
+    STEEL_SIDING
+    STONE
+    STONE_VENEER
+    STRAW
+    STUCCO
+    SYNTHETIC_STUCCO
+    UNKNOWN
+    VERTICAL_SIDING
+    VINYL_SIDING
+    WOOD_SIDING
+}
+
+enum Cooling {
+    ATTIC_FAN
+    CEILING_FANS
+    CENTRAL_AIR
+    DUAL
+    DUCTLESS
+    ELECTRIC
+    ENERGY_STAR_QUALIFIED_EQUIPMENT
+    EVAPORATIVE_COOLING
+    EXHAUST_FAN
+    GAS
+    GEOTHERMAL
+    HEAT_PUMP
+    HUMIDITY_CONTROL
+    MULTI_UNITS
+    NONE
+    OTHER
+    ROOF_TURBINES
+    SEPARATE_METERS
+    VARIES_BY_UNIT
+    WALL_UNITS
+    WALL_WINDOW_UNITS
+    WHOLE_HOUSE_FAN
+    WINDOW_UNITS
+    ZONED
+}
+
+enum Country {
+    AD
+    AE
+    AF
+    AG
+    AI
+    AL
+    AM
+    AN
+    AO
+    AQ
+    AR
+    AS
+    AT
+    AU
+    AW
+    AX
+    AZ
+    BA
+    BB
+    BD
+    BE
+    BF
+    BG
+    BH
+    BI
+    BJ
+    BL
+    BM
+    BN
+    BO
+    BR
+    BS
+    BT
+    BV
+    BW
+    BY
+    BZ
+    CA
+    CC
+    CD
+    CF
+    CG
+    CH
+    CI
+    CK
+    CL
+    CM
+    CN
+    CO
+    CR
+    CU
+    CV
+    CX
+    CY
+    CZ
+    DE
+    DJ
+    DK
+    DM
+    DO
+    DZ
+    EC
+    EE
+    EG
+    EH
+    ER
+    ES
+    ET
+    FI
+    FJ
+    FK
+    FM
+    FO
+    FR
+    GA
+    GB
+    GD
+    GE
+    GF
+    GG
+    GH
+    GI
+    GL
+    GM
+    GN
+    GP
+    GQ
+    GR
+    GS
+    GT
+    GU
+    GW
+    GY
+    HK
+    HM
+    HN
+    HR
+    HT
+    HU
+    ID
+    IE
+    IL
+    IM
+    IN
+    IO
+    IQ
+    IR
+    IS
+    IT
+    JE
+    JM
+    JO
+    JP
+    KE
+    KG
+    KH
+    KI
+    KM
+    KN
+    KP
+    KR
+    KW
+    KY
+    KZ
+    LA
+    LB
+    LC
+    LI
+    LK
+    LR
+    LS
+    LT
+    LU
+    LV
+    LY
+    MA
+    MC
+    MD
+    ME
+    MF
+    MG
+    MH
+    MK
+    ML
+    MM
+    MN
+    MO
+    MP
+    MQ
+    MR
+    MS
+    MT
+    MU
+    MV
+    MW
+    MX
+    MY
+    MZ
+    NA
+    NC
+    NE
+    NF
+    NG
+    NI
+    NL
+    NP
+    NR
+    NU
+    NZ
+    OM
+    OT
+    PA
+    PE
+    PF
+    PG
+    PH
+    PK
+    PL
+    PM
+    PN
+    PR
+    PS
+    PT
+    PW
+    PY
+    QA
+    RE
+    RO
+    RS
+    RU
+    RW
+    SA
+    SB
+    SC
+    SD
+    SE
+    SG
+    SH
+    SI
+    SJ
+    SK
+    SL
+    SM
+    SN
+    SO
+    SR
+    ST
+    SV
+    SY
+    SZ
+    TC
+    TD
+    TF
+    TG
+    TH
+    TJ
+    TK
+    TL
+    TM
+    TN
+    TO
+    TR
+    TT
+    TV
+    TW
+    TZ
+    UA
+    UG
+    UM
+    US
+    UY
+    UZ
+    VA
+    VC
+    VE
+    VG
+    VI
+    VN
+    VU
+    WF
+    WS
+    YE
+    YT
+    ZA
+    ZM
+    ZW
+}
+
+enum CurrentFinancing {
+    ASSUMABLE
+    CONTRACT
+    CONVENTIONAL
+    FHA
+    FHA_203_B
+    FHA_203_K
+    LEASED_RENEWABLES
+    NONE
+    OTHER
+    POWER_PURCHASE_AGREEMENT
+    PRIVATE
+    PROPERTY_ASSESSED_CLEAN_ENERGY
+    TRUST_DEED
+    USDA
+    VA
+}
+
+enum DirectionFaces {
+    EAST
+    NORTH
+    NORTHEAST
+    NORTHWEST
+    SOUTH
+    SOUTHEAST
+    SOUTHWEST
+    WEST
+}
+
+enum LinearUnits {
+    FEET
+    METERS
+}
+
+enum DoorFeatures {
+    ENERGY_STAR_QUALIFIED_DOORS
+    FRENCH_DOORS
+    MIRRORED_CLOSET_DOORS
+    SLIDING_DOORS
+    STORM_DOORS
+}
+
+enum Electric {
+    AMPS_100
+    AMPS_150
+    AMPS_200_OR_MORE
+    CIRCUIT_BREAKERS
+    ENERGY_STORAGE_DEVICE
+    FUSES
+    GENERATOR
+    NET_METER
+    PHOTOVOLTAICS_SELLER_OWNED
+    PHOTOVOLTAICS_THIRD_PARTY_OWNED
+    PRE_WIRED_FOR_RENEWABLES
+    READY_FOR_RENEWABLES
+    UNDERGROUND
+    VOLTS_220
+    VOLTS_220_FOR_SPA
+    VOLTS_220_IN_GARAGE
+    VOLTS_220_IN_KITCHEN
+    VOLTS_220_IN_LANUDRY
+    VOLTS_220_IN_WORKSHOP
+    VOLTS_440
+    WIND_TURBINE_SELLER_OWNED
+    WIND_TURBINE_THIRD_PARTY_OWNED
+}
+
+enum ExistingLeaseType {
+    ABSOLUTE_NET
+    CPI_ADJUSTMENT
+    ESCALATION_CLAUSE
+    GROSS
+    GROUND_LEASE
+    NET
+    NN
+    NNN
+    ORAL
+}
+
+enum ExteriorFeatures {
+    AWNINGS
+    BALCONY
+    BARBECUE
+    BASKETBALL_COURT
+    BOAT_SLIP
+    BUILT_IN_BARBECUE
+    COURTYARD
+    COVERED_COURTYARD
+    DOCK
+    DOG_RUN
+    ELECTRIC_GRILL
+    FIRE_PIT
+    GARDEN
+    GAS_GRILL
+    GRAY_WATER_SYSTEM
+    KENNEL
+    LIGHTING
+    MISTING_SYSTEM
+    NONE
+    OTHER
+    OUTDOOR_GRILL
+    OUTDOOR_KITCHEN
+    OUTDOOR_SHOWER
+    PERMEABLE_PAVING
+    PLAYGROUND
+    PRIVATE_ENTRANCE
+    PRIVATE_YARD
+    RAIN_BARREL_CISTERNS
+    RAIN_GUTTERS
+    RV_HOOKUP
+    STORAGE
+    TENNIS_COURTS
+    UNCOVERED_COURTYARD
+}
+
+enum FinancialDataSource {
+    ACCOUNTANT
+    OWNER
+    PROPERTY_MANAGER
+}
+
+enum FireplaceFeatures {
+    BASEMENT
+    BATH
+    BEDROOM
+    BLOWER_FAN
+    CIRCULATING
+    DECORATIVE
+    DEN
+    DINING_ROOM
+    DOUBLE_SIDED
+    ELECTRIC
+    EPA_CERTIFIED_WOOD_STOVE
+    EPA_QUALIFIED_FIREPLACE
+    FACTORY_BUILT
+    FAMILY_ROOM
+    FIRE_PIT
+    FREE_STANDING
+    GAS
+    GAS_LOG
+    GAS_STARTER
+    GLASS_DOORS
+    GREAT_ROOM
+    HEATILATOR
+    INSERT
+    KITCHEN
+    LIBRARY
+    LIVING_ROOM
+    MASONRY
+    MASTER_BEDROOM
+    METAL
+    NONE
+    OTHER
+    OUTSIDE
+    PELLET_STOVE
+    PROPANE
+    RAISED_HEARTH
+    RECREATION_ROOM
+    SEALED_COMBUSTION
+    SEE_REMARKS
+    SEE_THROUGH
+    STONE
+    VENTLESS
+    WOOD_BURNING
+    WOOD_BURNING_STOVE
+    ZERO_CLEARANCE
+}
+
+enum Flooring {
+    ADOBE
+    BAMBOO
+    BRICK
+    CARPET
+    CERAMIC_TILE
+    CLAY
+    COMBINATION
+    CONCRETE
+    CORK
+    CRI_GREEN_LABEL_PLUS_CERTIFIED_CARPET
+    DIRT
+    FLOORSCORE_CERTIFIED_FLOORING
+    FSC_OR_SFI_CERTIFIED_SOURCE_HARDWOOD
+    GRANITE
+    HARDWOOD
+    LAMINATE
+    LINOLEUM
+    MARBLE
+    NONE
+    OTHER
+    PAINTED_STAINED
+    PARQUET
+    PAVERS
+    RECLAIMED_WOOD
+    SEE_REMARKS
+    SIMULATED_WOOD
+    SLATE
+    SOFTWOOD
+    STAMPED
+    STONE
+    SUSTAINABLE
+    TERRAZZO
+    TILE
+    VARIES
+    VINYL
+    WOOD
+}
+
+enum FoundationDetails {
+    BLOCK
+    BRICK_MORTAR
+    COMBINATION
+    CONCRETE_PERIMETER
+    NONE
+    OTHER
+    PERMANENT
+    PILLAR_POST_PIER
+    RAISED
+    SEE_REMARKS
+    SLAB
+    STONE
+}
+
+enum Furnished {
+    FURNISHED
+    NEGOTIABLE
+    PARTIALLY
+    UNFURNISHED
+}
+
+enum GreenBuildingVerificationType {
+    CERTIFIED_PASSIVE_HOUSE
+    ENERGY_STAR_CERTIFIED_HOMES
+    ENERPHIT
+    HERS_INDEX_SCORE
+    HOME_ENERGY_SCORE
+    HEUCOEEI
+    HEUCOEEP
+    HOME_PERFORMANCE_WITH_ENERGY_STAR
+    INDOOR_AIRPLUS
+    LEED_FOR_HOMES
+    LIVING_BUILDING_CHALLENGE
+    NGBS_NEW_CONSTRUCTION
+    NGBS_SMALL_PROJECTS_REMODEL
+    NGBS_WHOLE_HOME_REMODEL
+    PHIUS_PLUS
+    WATERSENSE
+    ZERO_ENERGY_READY_HOME
+}
+
+enum GreenEnergyEfficient {
+    APPLIANCES
+    CONSTRUCTION
+    DOORS
+    EXPOSURE_SHADE
+    HVAC
+    INCENTIVES
+    INSULATION
+    LIGHTING
+    ROOF
+    THERMOSTAT
+    WATER_HEATER
+    WINDOWS
+}
+
+enum GreenEnergyGeneration {
+    SOLAR
+    WIND
+}
+
+enum GreenIndoorAirQuality {
+    CONTAMINANT_CONTROL
+    INTEGRATED_PEST_MANAGEMENT
+    MOISTURE_CONTROL
+    VENTILATION
+}
+
+enum GreenSustainability {
+    CONSERVING_METHODS
+    ONSITE_RECYCLING_CENTER
+    RECYCLABLE_MATERIALS
+    RECYCLED_MATERIALS
+    REGIONALLY_SOURCED_MATERIALS
+    RENEWABLE_MATERIALS
+    SALVAGED_MATERIALS
+}
+
+enum GreenWaterConservation {
+    EFFICIENT_HOT_WATER_DISTRIBUTION
+    GRAY_WATER_SYSTEM
+    GREEN_INFRASTRUCTURE
+    LOW_FLOW_FIXTURES
+    WATER_RECYCLING
+    WATER_SMART_LANDSCAPING
+}
+
+enum Heating {
+    ACTIVE_SOLAR
+    BASEBOARD
+    CEILING
+    CENTRAL
+    COAL
+    COAL_STOVE
+    DUCTLESS
+    ELECTRIC
+    ENERGY_STAR_ACCA_RSI_QUALIFIED_INSTALLATION
+    ENERGY_STAR_QUALIFIED_EQUIPMENT
+    EXHAUST_FAN
+    FIREPLACE_INSERT
+    FIREPLACES
+    FLOOR_FURNACE
+    FORCED_AIR
+    GEOTHERMAL
+    GRAVITY
+    HEAT_PUMP
+    HOT_WATER
+    HUMIDITY_CONTROL
+    KEROSENE
+    NATURAL_GAS
+    NONE
+    OIL
+    OTHER
+    PASSIVE_SOLAR
+    PELLET_STOVE
+    PROPANE
+    PROPANE_STOVE
+    RADIANT
+    RADIANT_CEILING
+    RADIANT_FLOOR
+    SEE_REMARKS
+    SEPARATE_METERS
+    SOLAR
+    SPACE_HEATER
+    STEAM
+    VARIES_BY_UNIT
+    WALL_FURNACE
+    WOOD
+    WOOD_STOVE
+    ZONED
+}
+
+enum HorseAmenities {
+    ARENA
+    BARN
+    BOARDING_FACILITIES
+    CORRALS
+    HAY_STORAGE
+    NONE
+    OTHER
+    PADDOCKS
+    PALPATION_CHUTE
+    PASTURE
+    RIDING_TRAIL
+    ROUND_PEN
+    SEE_REMARKS
+    SHAVING_BIN
+    STABLES
+    TACK_ROOM
+    TRAILER_STORAGE
+    WASH_RACK
+}
+
+enum HoursDaysOfOperation {
+    EVENINGS_ONLY
+    OPEN_24_HOURS
+    OPEN_7_DAYS
+    OPEN_8_HOURS_DAY
+    OPEN_LESS_THAN_8_HOURS_DAY
+    OPEN_MONDAY_FRIDAY
+    OPEN_OVER_8_HOURS_DAY
+    OPEN_SATURDAY
+    OPEN_SUNDAY
+}
+
+enum IncomeIncludes {
+    LAUNDRY
+    PARKING
+    RECREATION
+    RENT_ONLY
+    RV_STORAGE
+    STORAGE
+}
+
+enum InteriorOrRoomFeatures {
+    BAR
+    BEAMED_CEILINGS
+    BIDET
+    BOOKCASES
+    BREAKFAST_BAR
+    BUILT_IN_FEATURES
+    CATHEDRAL_CEILINGS
+    CEDAR_CLOSETS
+    CEILING_FANS
+    CENTRAL_VACUUM
+    CHANDELIER
+    COFFERED_CEILINGS
+    CROWN_MOLDING
+    DOUBLE_VANITY
+    DRY_BAR
+    DUMBWAITER
+    EAT_IN_KITCHEN
+    ELEVATOR
+    ENTRANCE_FOYER
+    GRANITE_COUNTERS
+    HIGH_CEILINGS
+    HIGH_SPEED_INTERNET
+    HIS_AND_HERS_CLOSETS
+    IN_LAW_FLOORPLAN
+    KITCHEN_ISLAND
+    LAMINATE_COUNTERS
+    LOW_FLOW_PLUMBING_FIXTURES
+    MASTER_DOWNSTAIRS
+    NATURAL_WOODWORK
+    OPEN_FLOORPLAN
+    OTHER
+    PANTRY
+    RECESSED_LIGHTING
+    SAUNA
+    SEE_REMARKS
+    SMART_HOME
+    SMART_THERMOSTAT
+    SOAKING_TUB
+    SOLAR_TUBES
+    SOUND_SYSTEM
+    STONE_COUNTERS
+    STORAGE
+    TILE_COUNTERS
+    TRACK_LIGHTING
+    TRAY_CEILINGS
+    VAULTED_CEILINGS
+    WALK_IN_CLOSETS
+    WATER_SENSE_FIXTURES
+    WET_BAR
+    WIRED_FOR_DATA
+    WIRED_FOR_SOUND
+}
+
+enum LaundryFeatures {
+    COMMON_AREA
+    ELECTRIC_DRYER_HOOKUP
+    GAS_DRYER_HOOKUP
+    IN_BASEMENT
+    IN_BATHROOM
+    IN_CARPORT
+    IN_GARAGE
+    IN_HALL
+    IN_KITCHEN
+    INSIDE
+    IN_UNIT
+    LAUNDRY_CHUTE
+    LAUNDRY_CLOSET
+    LAUNDRY_ROOM
+    LOWER_LEVEL
+    MAIN_LEVEL
+    MULTIPLE_LOCATIONS
+    NONE
+    OTHER
+    OUTSIDE
+    SEE_REMARKS
+    SINK
+    UPPER_LEVEL
+    WASHER_HOOKUP
+}
+
+enum LeaseRenewalCompensation {
+    CALL_LISTING_AGENT
+    CALL_LISTING_OFFICE
+    COMMISSION_PAID_ON_TENANT_PURCHASE
+    NO_RENEWAL_COMMISSION
+    RENEWAL_COMMISSION_PAID
+}
+
+enum LeaseTerm {
+    MONTH_TO_MONTH
+    NEGOTIABLE
+    NONE
+    OTHER
+    RENEWAL_OPTION
+    SHORT_TERM_LEASE
+    SIX_MONTHS
+    TWELVE_MONTHS
+    TWENTY_FOUR_MONTHS
+    WEEKLY
+}
+
+enum Levels {
+    MULTI_SPLIT
+    ONE
+    ONE_AND_ONE_HALF
+    THREE_OR_MORE
+    TWO
+}
+
+enum ListingAgreement {
+    EXCLUSIVE_AGENCY
+    EXCLUSIVE_RIGHT_TO_LEASE
+    EXCLUSIVE_RIGHT_TO_SELL
+    EXCLUSIVE_RIGHT_WITH_EXCEPTION
+    NET
+    OPEN
+    PROBATE
+}
+
+enum ListingService {
+    ENTRY_ONLY
+    FULL_SERVICE
+    LIMITED_SERVICE
+}
+
+enum ListingTerms {
+    ALL_INCLUSIVE_TRUST_DEED
+    ASSUMABLE
+    CASH
+    CONTRACT
+    CONVENTIONAL
+    EXCHANGE_1031
+    EXISTING_BONDS
+    FHA
+    LAND_USE_FEE
+    LEASE_BACK
+    LEASE_OPTION
+    LEASE_PURCHASE
+    LIEN_RELEASE
+    OWNER_MAY_CARRY
+    OWNER_PAY_POINTS
+    OWNER_WILL_CARRY
+    PRIVATE_FINANCING_AVAILABLE
+    RELOCATION_PROPERTY
+    SELLER_EQUITY_SHARE
+    SPECIAL_FUNDING
+    SUBMIT
+    TRADE
+    TRUST_CONVEYANCE
+    TRUST_DEED
+    USDA_LOAN
+    VA_LOAN
+}
+
+enum LockBoxType {
+    CALL_LISTING_OFFICE
+    CALL_SELLER_DIRECT
+    COMBO
+    NONE
+    OTHER
+    SEE_REMARKS
+    SENTRILOCK
+    SUPRA
+}
+
+enum LotFeatures {
+    AGRICULTURAL
+    BACK_YARD
+    BLUFF
+    CITY_LOT
+    CLEARED
+    CLOSE_TO_CLUBHOUSE
+    CORNER_LOT
+    CORNERS_MARKED
+    CUL_DE_SAC
+    DESERT_BACK
+    DESERT_FRONT
+    FARM
+    FEW_TREES
+    FLAG_LOT
+    FRONT_YARD
+    GARDEN
+    GENTLE_SLOPING
+    GREENBELT
+    INTERIOR_LOT
+    IRREGULAR_LOT
+    LANDSCAPED
+    LEVEL
+    MANY_TREES
+    MEADOW
+    NATIVE_PLANTS
+    NEAR_GOLF_COURSE
+    NEAR_PUBLIC_TRANSIT
+    ON_GOLF_COURSE
+    OPEN_LOT
+    ORCHARDS
+    OTHER
+    PASTURE
+    PAVED
+    PIE_SHAPED_LOT
+    PRIVATE
+    RECTANGULAR_LOT
+    ROCK_OUTCROPPING
+    ROLLING_SLOPE
+    SECLUDED
+    SEE_REMARKS
+    SLOPED
+    SLOPED_DOWN
+    SLOPED_UP
+    SPLIT_POSSIBLE
+    SPRINKLERS_IN_FRONT
+    SPRINKLERS_IN_REAR
+    STEEP_SLOPE
+    SUBDIVIDED
+    VIEWS
+    WATERFALL
+    WATERFRONT
+    WETLANDS
+    WOODED
+    ZERO_LOT_LINE
+}
+
+enum LotSizeUnits {
+    ACRES
+    SQUARE_FEET
+    SQUARE_METERS
+}
+
+enum ChangeType {
+    ACTIVE
+    ACTIVE_UNDER_CONTRACT
+    BACK_ON_MARKET
+    CANCELED
+    CLOSED
+    DELETED
+    EXPIRED
+    HOLD
+    NEW_LISTING
+    PENDING
+    PRICE_CHANGE
+    WITHDRAWN
+}
+
+enum OccupantType {
+    OWNER
+    TENANT
+    VACANT
+}
+
+enum OperatingExpenseIncludes {
+    ACCOUNTING
+    ADVERTISING
+    ASSOCIATION
+    CABLE_TV
+    CAPITAL_IMPROVEMENTS
+    DEPRECIATION
+    EQUIPMENT_RENTAL
+    FUEL
+    FURNITURE_REPLACEMENT
+    GARDENER
+    INSURANCE
+    LEGAL
+    LICENSES
+    MAINTENANCE
+    MAINTENANCE_GROUNDS
+    MAINTENANCE_STRUCTURE
+    MANAGER
+    MORTGAGE_LOANS
+    NEW_TAX
+    OTHER
+    PARKING
+    PEST_CONTROL
+    POOL_SPA
+    PROFESSIONAL_MANAGEMENT
+    SECURITY
+    SNOW_REMOVAL
+    STAFF
+    SUPPLIES
+    TRASH
+    UTILITIES
+    VACANCY_ALLOWANCE
+    WATER_SEWER
+    WORKMANS_COMPENSATION
+}
+
+enum OtherEquipment {
+    AIR_PURIFIER
+    CALL_LISTING_AGENT
+    COMPRESSOR
+    DC_WELL_PUMP
+    DEHUMIDIFIER
+    FARM_EQUIPMENT
+    FUEL_TANKS
+    GENERATOR
+    HOME_THEATER
+    INTERCOM
+    IRRIGATION_EQUIPMENT
+    LIST_AVAILABLE
+    LIVESTOCK_EQUIPMENT
+    NEGOTIABLE
+    NONE
+    ORCHARD_EQUIPMENT
+    OTHER
+    ROTARY_ANTENNA
+    SATELLITE_DISH
+    TV_ANTENNA
+    VARIES_BY_UNIT
+}
+
+enum OwnerPays {
+    ALL_UTILITIES
+    ASSOCIATION_FEES
+    CABLE_TV
+    COMMON_AREA_MAINTENANCE
+    ELECTRICITY
+    EXTERIOR_MAINTENANCE
+    GAS
+    GROUNDS_CARE
+    HOT_WATER
+    HVAC_MAINTENANCE
+    INSURANCE
+    JANITORIAL_SERVICE
+    MANAGEMENT
+    NONE
+    OTHER
+    OTHER_TAX
+    PARKING_FEE
+    PEST_CONTROL
+    POOL_MAINTENANCE
+    REPAIRS
+    ROOF_MAINTENANCE
+    SECURITY
+    SEE_REMARKS
+    SEWER
+    SNOW_REMOVAL
+    TAXES
+    TELEPHONE
+    TRASH_COLLECTION
+    WATER
+}
+
+enum OwnershipType {
+    CORPORATION
+    LLC
+    PARTNERSHIP
+    SOLE_PROPRIETOR
+}
+
+enum ParkingFeatures {
+    ADDITIONAL_PARKING
+    AGGREGATE
+    ALLEY_ACCESS
+    ASPHALT
+    ASSIGNED
+    ATTACHED
+    ATTACHED_CARPORT
+    BASEMENT
+    BOAT
+    CARPORT
+    CIRCULAR_DRIVEWAY
+    COMMON
+    COMMUNITY_STRUCTURE
+    CONCRETE
+    CONVERTED_GARAGE
+    COVERED
+    DECK
+    DEEDED
+    DETACHED
+    DETACHED_CARPORT
+    DIRECT_ACCESS
+    DRIVE_THROUGH
+    DRIVEWAY
+    ELECTRIC_GATE
+    ELECTRIC_VEHICLE_CHARGING_STATIONS
+    ENCLOSED
+    GARAGE
+    GARAGE_DOOR_OPENER
+    GARAGE_FACES_FRONT
+    GARAGE_FACES_REAR
+    GARAGE_FACES_SIDE
+    GATED
+    GOLF_CART_GARAGE
+    GRAVEL
+    GUEST
+    HEATED_GARAGE
+    INSIDE_ENTRANCE
+    KITCHEN_LEVEL
+    LEASED
+    LIGHTED
+    NO_GARAGE
+    NONE
+    OFF_SITE
+    OFF_STREET
+    ON_SITE
+    ON_STREET
+    OPEN
+    OTHER
+    OUTSIDE
+    OVERSIZED
+    PARKING_LOT
+    PARKING_PAD
+    PAVED
+    PAVER_BLOCK
+    PERMIT_REQUIRED
+    PRIVATE
+    RV_ACCESS_PARKING
+    RV_CARPORT
+    RV_GARAGE
+    RV_GATED
+    SECURED
+    SEE_REMARKS
+    SHARED_DRIVEWAY
+    SIDE_BY_SIDE
+    STORAGE
+    TANDEM
+    UNASSIGNED
+    UNDERGROUND
+    UNPAVED
+    VALET
+    VARIES_BY_UNIT
+    WORKSHOP_IN_GARAGE
+}
+
+enum PatioAndPorchFeatures {
+    AWNINGS
+    COVERED
+    DECK
+    ENCLOSED
+    FRONT_PORCH
+    GLASS_ENCLOSED
+    NONE
+    OTHER
+    PATIO
+    PORCH
+    REAR_PORCH
+    SCREENED
+    SEE_REMARKS
+    SIDE_PORCH
+    TERRACE
+    WRAP_AROUND
+}
+
+enum PetsAllowed {
+    BREED_RESTRICTIONS
+    CALL
+    CATS_OK
+    DOGS_OK
+    NO
+    NUMBER_LIMIT
+    SIZE_LIMIT
+    YES
+}
+
+enum PoolFeatures {
+    ABOVE_GROUND
+    ASSOCIATION
+    BLACK_BOTTOM
+    CABANA
+    COMMUNITY
+    DIVING_BOARD
+    ELECTRIC_HEAT
+    ENERGY_STAR_QUALIFIED_POOL_PUMP
+    FENCED
+    FIBERGLASS
+    FILTERED
+    GAS_HEAT
+    GUNITE
+    HEATED
+    INDOOR
+    INFINITY
+    IN_GROUND
+    LAP
+    LINER
+    NONE
+    OTHER
+    OUTDOOR_POOL
+    POOL_COVER
+    POOL_SPA_COMBO
+    POOL_SWEEP
+    PRIVATE
+    SALT_WATER
+    SCREEN_ENCLOSURE
+    SEE_REMARKS
+    SOLAR_COVER
+    SOLAR_HEAT
+    SPORT
+    TILE
+    VINYL
+    WATERFALL
+}
+
+enum Possession {
+    CLOSE_OF_ESCROW
+    CLOSE_PLUS_1_DAY
+    CLOSE_PLUS_2_DAYS
+    CLOSE_PLUS_30_DAYS
+    CLOSE_PLUS_3_DAYS
+    CLOSE_PLUS_3_TO_5_DAYS
+    NEGOTIABLE
+    OTHER
+    RENTAL_AGREEMENT
+    SEE_REMARKS
+    SELLER_RENT_BACK
+    SUBJECT_TO_TENANT_RIGHTS
+}
+
+enum PowerProductionType {
+    PHOTOVOLTAICS
+    WIND
+}
+
+enum PropertyCondition {
+    FIXER
+    NEW_CONSTRUCTION
+    UNDER_CONSTRUCTION
+    UPDATED_REMODELED
+}
+
+enum PropertySubType {
+    AGRICULTURE
+    APARTMENT
+    BOAT_SLIP
+    BUSINESS
+    CABIN
+    CONDOMINIUM
+    DEEDED_PARKING
+    DUPLEX
+    FARM
+    HOTEL_MOTEL
+    INDUSTRIAL
+    MANUFACTURED_HOME
+    MANUFACTURED_ON_LAND
+    MIXED_USE
+    MOBILE_HOME
+    MULTI_FAMILY
+    OFFICE
+    OWN_YOUR_OWN
+    QUADRUPLEX
+    RANCH
+    RETAIL
+    SINGLE_FAMILY_RESIDENCE
+    STOCK_COOPERATIVE
+    TIMESHARE
+    TOWNHOUSE
+    TRIPLEX
+    UNIMPROVED_LAND
+    WAREHOUSE
+}
+
+enum PropertyType {
+    BUSINESS_OPPORTUNITY
+    COMMERCIAL_LEASE
+    COMMERCIAL_SALE
+    FARM
+    LAND
+    MANUFACTURED_IN_PARK
+    RESIDENTIAL
+    RESIDENTIAL_INCOME
+    RESIDENTIAL_LEASE
+}
+
+enum RentIncludes {
+    ALL_UTILITIES
+    CABLE_TV
+    ELECTRICITY
+    GARDENER
+    GAS
+    INTERNET
+    MANAGEMENT
+    NONE
+    OTHER
+    SEE_REMARKS
+    SEWER
+    TRASH_COLLECTION
+    WATER
+}
+
+enum Roof {
+    ALUMINUM
+    ASBESTOS_SHINGLE
+    ASPHALT
+    BAHAMA
+    BARREL
+    BITUTHENE
+    BUILT_UP
+    COMPOSITION
+    CONCRETE
+    COPPER
+    ELASTOMERIC
+    FIBERGLASS
+    FLAT
+    FLAT_TILE
+    FOAM
+    GREEN_ROOF
+    MANSARD
+    MEMBRANE
+    METAL
+    MIXED
+    NONE
+    OTHER
+    ROLLED_HOT_MOP
+    RUBBER
+    SEE_REMARKS
+    SHAKE
+    SHINGLE
+    SLATE
+    SPANISH_TILE
+    STONE
+    SYNTHETIC
+    TAR_GRAVEL
+    TILE
+    WOOD
+}
+
+enum RoomType {
+    BASEMENT
+    BATHROOM
+    BATHROOM_1
+    BATHROOM_2
+    BATHROOM_3
+    BATHROOM_4
+    BATHROOM_5
+    BEDROOM
+    BEDROOM_1
+    BEDROOM_2
+    BEDROOM_3
+    BEDROOM_4
+    BEDROOM_5
+    BONUS_ROOM
+    DEN
+    DINING_ROOM
+    EXERCISE_ROOM
+    FAMILY_ROOM
+    GAME_ROOM
+    GREAT_ROOM
+    GYM
+    KITCHEN
+    LAUNDRY
+    LIBRARY
+    LIVING_ROOM
+    LOFT
+    MASTER_BATHROOM
+    MASTER_BEDROOM
+    MEDIA_ROOM
+    OFFICE
+    SAUNA
+    UTILITY_ROOM
+    WORKSHOP
+}
+
+enum SecurityFeatures {
+    BUILDING_SECURITY
+    CARBON_MONOXIDE_DETECTORS
+    CLOSED_CIRCUIT_CAMERAS
+    FIRE_ALARM
+    FIRE_ESCAPE
+    FIRE_SPRINKLER_SYSTEM
+    FIREWALLS
+    GATED_COMMUNITY
+    GATED_WITH_GUARD
+    KEY_CARD_ENTRY
+    OTHER
+    PANIC_ALARM
+    PREWIRED
+    SECURED_GARAGE_PARKING
+    SECURITY_FENCE
+    SECURITY_GATE
+    SECURITY_GUARD
+    SECURITY_LIGHTS
+    SECURITY_SERVICE
+    SECURITY_SYSTEM
+    SECURITY_SYSTEM_LEASED
+    SECURITY_SYSTEM_OWNED
+    SEE_REMARKS
+    SMOKE_DETECTORS
+    TWENTY_FOUR_HOUR_SECURITY
+    VARIES_BY_UNIT
+    WINDOW_BARS
+    WINDOW_BARS_WITH_QUICK_RELEASE
+}
+
+enum Sewer {
+    AEROBIC_SEPTIC
+    CESSPOOL
+    ENGINEERED_SEPTIC
+    HOLDING_TANK
+    MOUND_SEPTIC
+    NONE
+    OTHER
+    PERC_TEST_ON_FILE
+    PERC_TEST_REQUIRED
+    PRIVATE_SEWER
+    PUBLIC_SEWER
+    SEPTIC_NEEDED
+    SEPTIC_TANK
+    SHARED_SEPTIC
+    UNKNOWN
+}
+
+enum ShowingContactType {
+    AGENT
+    OCCUPANT
+    OWNER
+    PROPERTY_MANAGER
+}
+
+enum ShowingRequirements {
+    APPOINTMENT_ONLY
+    CALL_LISTING_AGENT
+    CALL_LISTING_OFFICE
+    CALL_MANAGER
+    CALL_OWNER
+    CALL_TENANT
+    COMBINATION_LOCK_BOX
+    DAY_SLEEPER
+    DO_NOT_SHOW
+    EMAIL_LISTING_AGENT
+    KEY_IN_OFFICE
+    LOCKBOX
+    NO_LOCKBOX
+    NO_SIGN
+    OCCUPIED
+    PETS_ON_PREMISES
+    RESTRICTED_HOURS
+    SECURITY_SYSTEM
+    SEE_REMARKS
+    SHOWING_SERVICE
+    TEXT_LISTING_AGENT
+    TO_BE_BUILT
+    TWENTY_FOUR_HOUR_NOTICE
+    UNDER_CONSTRUCTION
+}
+
+enum Skirt {
+    ALUMINUM
+    BLOCK
+    BRICK
+    COMBINATION
+    CONCRETE
+    FIBERGLASS
+    FRAME
+    GLASS
+    MASONITE
+    METAL
+    NONE
+    OTHER
+    STEEL
+    STONE
+    STUCCO
+    SYNTHETIC
+    UNKNOWN
+    VINYL
+    WOOD
+}
+
+enum SpaFeatures {
+    ABOVE_GROUND
+    BATH
+    COMMUNITY
+    FIBERGLASS
+    GUNITE
+    HEATED
+    IN_GROUND
+    NONE
+    PRIVATE
+    SEE_REMARKS
+}
+
+enum SpecialLicenses {
+    BEER_WINE
+    CLASS_H
+    ENTERTAINMENT
+    FRANCHISE
+    GAMBLING
+    LIQUOR
+    LIQUOR_5_YEARS_OR_LESS
+    LIQUOR_5_YEARS_OR_MORE
+    LIQUOR_OFF_SALE
+    LIQUOR_ON_SALE
+    NONE
+    OTHER
+    PROFESSIONAL
+}
+
+enum SpecialListingConditions {
+    AUCTION
+    BANKRUPTCY_PROPERTY
+    HUD_OWNED
+    IN_FORECLOSURE
+    NOTICE_OF_DEFAULT
+    PROBATE_LISTING
+    REAL_ESTATE_OWNED
+    SHORT_SALE
+    STANDARD
+    THIRD_PARTY_APPROVAL
+}
+
+enum StandardStatus {
+    ACTIVE
+    ACTIVE_UNDER_CONTRACT
+    CANCELED
+    CLOSED
+    COMING_SOON
+    DELETE
+    EXPIRED
+    HOLD
+    INCOMPLETE
+    PENDING
+    WITHDRAWN
+}
+
+enum StateOrProvince {
+    AB
+    AK
+    AL
+    AR
+    AZ
+    BC
+    CA
+    CO
+    CT
+    DC
+    DE
+    FL
+    GA
+    HI
+    IA
+    ID
+    IL
+    IN
+    KS
+    KY
+    LA
+    MA
+    MB
+    MD
+    ME
+    MI
+    MN
+    MO
+    MS
+    MT
+    NB
+    NC
+    ND
+    NE
+    NF
+    NH
+    NJ
+    NM
+    NS
+    NT
+    NU
+    NV
+    NY
+    OH
+    OK
+    ON
+    OR
+    PA
+    PE
+    QC
+    RI
+    SC
+    SD
+    SK
+    TN
+    TX
+    UT
+    VA
+    VI
+    VT
+    WA
+    WI
+    WV
+    WY
+    YT
+}
+
+enum StreetDirection {
+    E
+    N
+    NE
+    NW
+    S
+    SE
+    SW
+    W
+}
+
+enum StructureType {
+    CABIN
+    DOCK
+    DUPLEX
+    FLEX
+    HOTEL_MOTEL
+    HOUSE
+    INDUSTRIAL
+    MANUFACTURED_HOUSE
+    MIXED_USE
+    MULTI_FAMILY
+    NONE
+    OFFICE
+    QUADRUPLEX
+    RETAIL
+    TOWNHOUSE
+    TRIPLEX
+    WAREHOUSE
+}
+
+enum TenantPays {
+    ALL_UTILITIES
+    ASSOCIATION_FEES
+    CABLE_TV
+    COMMON_AREA_MAINTENANCE
+    ELECTRICITY
+    EXTERIOR_MAINTENANCE
+    GAS
+    GROUNDS_CARE
+    HOT_WATER
+    HVAC_MAINTENANCE
+    INSURANCE
+    JANITORIAL_SERVICE
+    MANAGEMENT
+    NONE
+    OTHER
+    OTHER_TAX
+    PARKING_FEE
+    PEST_CONTROL
+    POOL_MAINTENANCE
+    REPAIRS
+    ROOF
+    SECURITY
+    SEE_REMARKS
+    SEWER
+    SNOW_REMOVAL
+    TAXES
+    TELEPHONE
+    TRASH_COLLECTION
+    WATER
+}
+
+enum Utilities {
+    CABLE_AVAILABLE
+    CABLE_CONNECTED
+    CABLE_NOT_AVAILABLE
+    ELECTRICITY_AVAILABLE
+    ELECTRICITY_CONNECTED
+    ELECTRICITY_NOT_AVAILABLE
+    NATURAL_GAS_AVAILABLE
+    NATURAL_GAS_CONNECTED
+    NATURAL_GAS_NOT_AVAILABLE
+    NONE
+    OTHER
+    PHONE_AVAILABLE
+    PHONE_CONNECTED
+    PHONE_NOT_AVAILABLE
+    PROPANE
+    SEE_REMARKS
+    SEWER_AVAILABLE
+    SEWER_CONNECTED
+    SEWER_NOT_AVAILABLE
+    UNDERGROUND_UTILITIES
+    WATER_AVAILABLE
+    WATER_CONNECTED
+    WATER_NOT_AVAILABLE
+}
+
+enum View {
+    BAY
+    BEACH
+    BRIDGES
+    CANAL
+    CANYON
+    CITY
+    CITY_LIGHTS
+    CREEK_STREAM
+    DESERT
+    DOWNTOWN
+    FOREST
+    GARDEN
+    GOLF_COURSE
+    HILLS
+    LAKE
+    MARINA
+    MEADOW
+    MOUNTAINS
+    NEIGHBORHOOD
+    NONE
+    OCEAN
+    ORCHARD
+    OTHER
+    PANORAMIC
+    PARK_GREENBELT
+    PASTURE
+    POND
+    POOL
+    RIDGE
+    RIVER
+    RURAL
+    SEE_REMARKS
+    SKYLINE
+    TERRITORIAL
+    TREES_WOODS
+    VALLEY
+    VINEYARD
+    WATER
+}
+
+enum WaterSource {
+    CISTERN
+    NONE
+    OTHER
+    PRIVATE
+    PUBLIC
+    SEE_REMARKS
+    SHARED_WELL
+    SPRING
+    WELL
+}
+
+enum WaterfrontFeatures {
+    BEACH_ACCESS
+    BEACH_FRONT
+    CANAL_ACCESS
+    CANAL_FRONT
+    CREEK
+    LAGOON
+    LAKE
+    LAKE_FRONT
+    LAKE_PRIVILEGES
+    NAVIGABLE_WATER
+    OCEAN_ACCESS
+    OCEAN_FRONT
+    POND
+    RIVER_ACCESS
+    RIVER_FRONT
+    SEAWALL
+    STREAM
+    WATERFRONT
+}
+
+enum WindowFeatures {
+    ALUMINUM_FRAMES
+    BAY_WINDOWS
+    BLINDS
+    DISPLAY_WINDOWS
+    DOUBLE_PANE_WINDOWS
+    DRAPES
+    ENERGY_STAR_QUALIFIED_WINDOWS
+    GARDEN_WINDOWS
+    INSULATED_WINDOWS
+    LOW_EMISSIVITY_WINDOWS
+    PLANTATION_SHUTTERS
+    SCREENS
+    SHUTTERS
+    SKYLIGHTS
+    SOLAR_SCREENS
+    STORM_WINDOWS
+    TINTED_WINDOWS
+    TRIPLE_PANE_WINDOWS
+    WINDOW_COVERINGS
+    WINDOW_TREATMENTS
+    WOOD_FRAMES
+}
+
+enum YearBuiltSource {
+    APPRAISER
+    ASSESSOR
+    BUILDER
+    ESTIMATED
+    OTHER
+    OWNER
+    PUBLIC_RECORDS
+    SEE_REMARKS
+}
+
+enum ClassName {
+    BUSINESS_OPPORTUNITY
+    COMMERCIAL_LEASE
+    COMMERCIAL_SALE
+    CONTACTS
+    CROSS_PROPERTY
+    FARM
+    HISTORY_TRANSACTIONAL
+    LAND
+    MANUFACTURED_IN_PARK
+    MEDIA
+    MEMBER
+    OFFICE
+    OPEN_HOUSE
+    RESIDENTIAL
+    RESIDENTIAL_INCOME
+    RESIDENTIAL_LEASE
+    SAVED_SEARCH
+}
+
+enum ImageOf {
+    AERIAL_VIEW
+    ATRIUM
+    ATTIC
+    BACK_OF_STRUCTURE
+    BALCONY
+    BAR
+    BARN
+    BASEMENT
+    BATHROOM
+    BEDROOM
+    BONUS_ROOM
+    BREAKFAST_AREA
+    CLOSET
+    COMMUNITY
+    COURTYARD
+    DECK
+    DEN
+    DINING_AREA
+    DINING_ROOM
+    DOCK
+    ENTRY
+    EXERCISE_ROOM
+    FAMILY_ROOM
+    FENCE
+    FIREPLACE
+    FLOOR_PLAN
+    FRONT_OF_STRUCTURE
+    GAME_ROOM
+    GARAGE
+    GARDEN
+    GOLF_COURSE
+    GREAT_ROOM
+    GUEST_QUARTERS
+    GYM
+    HOBBY_ROOM
+    INLAW
+    KITCHEN
+    LAKE
+    LAUNDRY
+    LIBRARY
+    LIVING_ROOM
+    LOADING_DOCK
+    LOBBY
+    LOFT
+    LOT
+    MASTER_BATHROOM
+    MASTER_BEDROOM
+    MEDIA_ROOM
+    MUD_ROOM
+    NURSERY
+    OFFICE
+    OTHER
+    OUT_BUILDINGS
+    PANTRY
+    PARKING
+    PATIO
+    PIER
+    PLAT_MAP
+    POND
+    POOL
+    RECEPTION
+    RECREATION_ROOM
+    SAUNA
+    SHOWROOM
+    SIDE_OF_STRUCTURE
+    SITTING_ROOM
+    SPA
+    STABLE
+    STORAGE
+    STUDIO
+    STUDY
+    SUN_ROOM
+    VIEW
+    WATERFRONT
+    WINE_CELLAR
+    WORKSHOP
+    YARD
+}
+
+enum MediaCategory {
+    AGENT_PHOTO
+    BRANDED_VIRTUAL_TOUR
+    DOCUMENT
+    FLOOR_PLAN
+    OFFICE_LOGO
+    OFFICE_PHOTO
+    PHOTO
+    UNBRANDED_VIRTUAL_TOUR
+    VIDEO
+}
+
+enum MediaType {
+    DOC
+    DOCX
+    GIF
+    JPEG
+    MOV
+    MP_4
+    MPEG
+    PDF
+    PNG
+    QUICKTIME
+    RTF
+    TIFF
+    TXT
+    WMV
+    XLS
+    XLSX
+}
+
+enum ResourceName {
+    CONTACTS
+    MEMBER
+    OFFICE
+    PROPERTY
+}

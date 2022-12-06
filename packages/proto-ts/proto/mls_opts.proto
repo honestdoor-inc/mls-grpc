@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package mls_opts;
+
+service MLSOpts {
+    rpc CreatePost(CreatePostRequest) returns (CreatePostResponse) {}
+}
+
+message CreatePostRequest {
+    string title = 1;
+    string body = 2;
+}
+
+message CreatePostResponse {
+    string id = 1;
+}
