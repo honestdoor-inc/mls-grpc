@@ -22,5 +22,6 @@
     "db-push": {
       "cache": false
     }
-  }
+  },
+  "globalEnv": ["RPC_SERVER_PORT", "RPC_SERVER_HOST"]
 }

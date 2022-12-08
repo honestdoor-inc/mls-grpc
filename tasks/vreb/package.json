@@ -1,0 +1,20 @@
+{
+  "name": "vreb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "with-env": "dotenv -e ../../.env --",
+    "dev": "pnpm with-env ts-node ./src/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@grpc/grpc-js": "^1.8.0",
+    "@honestdoor/proto-ts": "*"
+  },
+  "devDependencies": {
+    "dotenv-cli": "^6.0.0"
+  }
+}

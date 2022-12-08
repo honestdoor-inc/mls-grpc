@@ -9,9 +9,9 @@ export async function upsertProperty(
 ) {
   const request = call.request;
 
-  const response = new UpsertPropertyResponse();
+  const response = UpsertPropertyResponse.fromJSON({});
 
-  console.log(request.toObject());
+  // console.log(request.toObject());
 
   // const parsed = zod.propertySchema.safeParse();
 

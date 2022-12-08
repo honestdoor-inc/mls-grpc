@@ -1,19 +1,37 @@
-import * as grpc from "grpc";
+import * as grpc from "@grpc/grpc-js";
 
-import { IMLSServer, MLSService } from "@honestdoor/proto-ts";
+import { MLSServer, MLSService } from "@honestdoor/proto-ts";
 
-import { upsertProperty } from "./funcs";
+const { RPC_SERVER_HOST, RPC_SERVER_PORT } = process.env;
 
-const host = "0.0.0.0:9090";
+const mlsOptsService: MLSServer = {
+  upsertProperty: (call, callback) => {
+    const { request } = call;
 
-const mlsOptsService: IMLSServer = {
-  upsertProperty,
+    console.dir(request.property, { depth: null });
+
+    return callback(null, { success: true });
+  },
 };
 
-const server = new grpc.Server();
+async function startServer() {
+  const server = new grpc.Server();
 
-server.addService(MLSService, mlsOptsService);
+  server.addService(MLSService, mlsOptsService);
 
-server.bind(host, grpc.ServerCredentials.createInsecure());
+  server.bindAsync(
+    `${RPC_SERVER_HOST}:${RPC_SERVER_PORT}`,
+    grpc.ServerCredentials.createInsecure(),
+    (err, port) => {
+      if (err) {
+        console.error(err);
+      }
 
-server.start();
+      console.log(`Server running on port ${port}`);
+
+      server.start();
+    }
+  );
+}
+
+startServer();
