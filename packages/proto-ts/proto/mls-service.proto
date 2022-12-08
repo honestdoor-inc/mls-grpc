@@ -1,7 +1,15 @@
 syntax = "proto3";
 
-import "proto/property.proto";
+import "proto/generated.proto";
 
 service MLS {
     rpc UpsertProperty(UpsertPropertyRequest) returns (UpsertPropertyResponse) {}
+}
+
+message UpsertPropertyRequest {
+    Property property = 1;
+}
+
+message UpsertPropertyResponse {
+    bool success = 1;
 }

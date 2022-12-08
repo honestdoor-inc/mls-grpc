@@ -9,8 +9,7 @@
     "clean:workspaces": "turbo clean",
     "db-generate": "turbo db-generate",
     "db-push": "turbo db-push",
-    "dev": "turbo dev --parallel",
-    "postinstall": "turbo build"
+    "dev": "turbo dev --parallel"
   },
   "keywords": [],
   "author": "",

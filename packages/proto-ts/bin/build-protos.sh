@@ -10,6 +10,9 @@ PROTOC_GEN_GRPC_PATH="$(npm bin)/grpc_tools_node_protoc_plugin"
 rm -rf "$OUT_DIR"
 mkdir -p "$OUT_DIR"
 
+# Copy proto files from node_modules/database/generated/proto to ./proto
+cp -r ./node_modules/database/generated/proto/* ./proto
+
 $PROTOC \
     -I="./" \
     --plugin=protoc-gen-ts=$PROTOC_GEN_TS_PATH \
@@ -17,4 +20,4 @@ $PROTOC \
     --js_out=import_style=commonjs:$OUT_DIR \
     --grpc_out=grpc_js:$OUT_DIR \
     --ts_out=service=grpc-node,mode=grpc-js:$TS_OUT_DIR \
-    "$IN_DIR"/*
+    "$IN_DIR"/*.proto

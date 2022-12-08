@@ -1,5 +1,5 @@
 {
   "protoc": {
-    "options": ["--proto_path=packages/proto-ts"]
+    "options": ["--proto_path=packages/proto-ts", "--proto_path=packages/database/generated"]
   }
 }

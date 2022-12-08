@@ -1,7 +1,7 @@
 import { SUC, SUD } from "../types";
 import { UpsertPropertyRequest, UpsertPropertyResponse } from "@honestdoor/proto-ts";
 
-import { zod } from "database";
+// import { zod } from "database";
 
 export async function upsertProperty(
   call: SUC<UpsertPropertyRequest>,
@@ -11,9 +11,11 @@ export async function upsertProperty(
 
   const response = new UpsertPropertyResponse();
 
-  const _parsed = zod.propertySchema.safeParse(request.toObject());
+  console.log(request.toObject());
 
-  response.setSuccess(_parsed.success);
+  // const parsed = zod.propertySchema.safeParse();
+
+  // response.setData(parsed);
 
   return callback(null, response);
 }
