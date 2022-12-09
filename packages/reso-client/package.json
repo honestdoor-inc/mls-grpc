@@ -1,0 +1,17 @@
+{
+  "name": "reso-client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "types": "index.ts",
+  "scripts": {
+    "build": "./generate.sh",
+    "clean": "rm -rf .turbo node_modules generated"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "axios": "^1.2.1"
+  }
+}

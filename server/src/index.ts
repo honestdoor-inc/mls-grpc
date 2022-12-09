@@ -2,7 +2,7 @@ import * as grpc from "@grpc/grpc-js";
 
 import { MLSServer, MLSService } from "@honestdoor/proto-ts";
 
-const { RPC_SERVER_HOST, RPC_SERVER_PORT } = process.env;
+const { RPC_SERVER_URL } = process.env;
 
 const mlsOptsService: MLSServer = {
   upsertProperty: (call, callback) => {
@@ -20,7 +20,7 @@ async function startServer() {
   server.addService(MLSService, mlsOptsService);
 
   server.bindAsync(
-    `${RPC_SERVER_HOST}:${RPC_SERVER_PORT}`,
+    RPC_SERVER_URL as string,
     grpc.ServerCredentials.createInsecure(),
     (err, port) => {
       if (err) {

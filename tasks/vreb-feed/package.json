@@ -1,5 +1,5 @@
 {
-  "name": "vreb",
+  "name": "vreb-feed",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -12,9 +12,16 @@
   "license": "ISC",
   "dependencies": {
     "@grpc/grpc-js": "^1.8.0",
-    "@honestdoor/proto-ts": "*"
+    "@honestdoor/proto-ts": "*",
+    "axios": "^1.2.1",
+    "database": "*",
+    "fp-ts": "^2.13.1",
+    "lodash": "^4.17.21",
+    "reso-client": "*",
+    "helpers": "*"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.191",
     "dotenv-cli": "^6.0.0"
   }
 }

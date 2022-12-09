@@ -14,7 +14,7 @@ generator zod {
     modelCase             = "camelCase"
     modelSuffix           = "Schema"
     useDecimalJs          = true
-    prismaJsonNullability = true
+    prismaJsonNullability = false
 }
 
 generator jsonSchema {
