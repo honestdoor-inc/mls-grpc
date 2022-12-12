@@ -5,6 +5,7 @@
   "main": "./index.ts",
   "types": "./index.ts",
   "scripts": {
+    "dev": "prisma studio",
     "db-generate": "prisma generate",
     "db-push": "prisma db push --skip-generate",
     "clean": "rm -rf .turbo node_modules generated"

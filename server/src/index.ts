@@ -1,14 +1,39 @@
+import "./queues/property";
+import "./queues/media";
+
 import * as grpc from "@grpc/grpc-js";
 
 import { MLSServer, MLSService } from "@honestdoor/proto-ts";
+import { createPropertiesFlow, createPropertyFlow } from "./queues/flows";
 
 const { RPC_SERVER_URL } = process.env;
 
 const mlsOptsService: MLSServer = {
-  upsertProperty: (call, callback) => {
-    const { request } = call;
+  upsertProperty: async (call, callback) => {
+    const { property } = call.request;
 
-    console.dir(request.property, { depth: null });
+    if (!property) return callback(new Error("Property is required"), { success: false });
+
+    const propertyFlow = await createPropertyFlow(property);
+
+    if (!propertyFlow.job)
+      return callback(new Error("Failed to create property flow"), {
+        success: false,
+      });
+
+    return callback(null, { success: true });
+  },
+  upsertProperties: async (call, callback) => {
+    const { properties } = call.request;
+
+    if (!properties) return callback(new Error("Properties are required"), { success: false });
+
+    const propertiesFlow = await createPropertiesFlow(properties);
+
+    if (!propertiesFlow.length)
+      return callback(new Error("Failed to create properties flow"), {
+        success: false,
+      });
 
     return callback(null, { success: true });
   },

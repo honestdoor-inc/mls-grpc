@@ -1,4 +1,5 @@
 import { DMMF } from "@prisma/generator-helper";
+import { parseDoc } from "./parseOptions";
 
 export const genProtoModel = ({ name, fields }: DMMF.Model) => {
   const protoFields = fields.map(genField).filter(Boolean).join("\n");
@@ -7,7 +8,11 @@ export const genProtoModel = ({ name, fields }: DMMF.Model) => {
 };
 
 export function genField(field: DMMF.Field, i: number) {
-  const { name, kind, type, isList, isRequired, isId } = field;
+  const { name, kind, type, isList, isRequired, isId, documentation } = field;
+
+  const options = parseDoc(documentation);
+
+  if (options?.ignore) return;
 
   const els = [];
 

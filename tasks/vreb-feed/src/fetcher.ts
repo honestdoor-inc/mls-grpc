@@ -23,7 +23,7 @@ export async function fetcher(
 
   if (!ctx.nextLink) {
     const res = await propertyApi.propertyGet({
-      $top: 100,
+      $top: ctx.batchSize,
       $filter: filter,
     });
 

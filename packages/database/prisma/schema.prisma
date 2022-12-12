@@ -44,7 +44,10 @@ model Property {
     bathroomsThreeQuarter               Int?
     bathroomsTotalInteger               Int?
     bedroomsTotal                       Int?
+    builderModel                        String?
+    builderName                         String?
     buildingFeatures                    String[]
+    buildingName                        String?
     businessType                        String[]
     buyerAgencyCompensation             String?
     buyerAgencyCompensationType         String?
@@ -121,6 +124,10 @@ model Property {
     country                             String?
     countryRegion                       String?
     countyOrParish                      String?
+    cropsIncludedYn                     Boolean?
+    cultivatedArea                      Float?
+    currentUse                          String[]
+    developmentStatus                   String[]
     distanceToBusNumeric                Int?
     distanceToBusUnits                  String?
     distanceToElectricNumeric           Int?
@@ -149,15 +156,25 @@ model Property {
     dualVariableCompensationYn          Boolean?
     expirationDate                      DateTime?
     exteriorFeatures                    String[]
+    farmCreditServiceInclYn             Boolean?
+    farmLandAreaSource                  String?
+    farmLandAreaUnits                   String?
+    fencing                             String[]
     fireplaceFeatures                   String[]
     fireplaceYn                         Boolean?
     fireplacesTotal                     Int?
     flooring                            String[]
+    frontageLength                      String?
+    frontageType                        String[]
     garageSpaces                        Float?
     garageYn                            Boolean?
+    grazingPermitsBlmYn                 Boolean?
+    grazingPermitsForestServiceYn       Boolean?
+    grazingPermitsPrivateYn             Boolean?
     greenBuildingVerification           String[]
     grossIncome                         Float?
     grossScheduledIncome                Float?
+    habitableResidenceYn                Boolean?
     heating                             String[]
     heatingYn                           Boolean?
     horseAmenities                      String[]
@@ -202,8 +219,12 @@ model Property {
     livingArea                          Float?
     livingAreaUnits                     String?
     longitude                           Float?
+    lotDimensionsSource                 String?
     lotFeatures                         String[]
+    lotSizeAcres                        Float?
     lotSizeArea                         Float?
+    lotSizeDimensions                   String?
+    lotSizeSquareFeet                   Float?
     lotSizeUnits                        String?
     mlsAreaMajor                        String?
     make                                String?
@@ -223,13 +244,16 @@ model Property {
     originatingSystemKey                String?
     originatingSystemName               String?
     otherEquipment                      String[]
+    otherStructures                     String[]
     parcelNumber                        String?
     parkingFeatures                     String[]
+    pastureArea                         Float?
     patioAndPorchFeatures               String[]
     photosChangeTimestamp               DateTime?
     photosCount                         Int?
     poolFeatures                        String[]
     poolPrivateYn                       Boolean?
+    possibleUse                         String[]
     postalCity                          String?
     postalCode                          String?
     postalCodePlus4                     String?
@@ -239,8 +263,17 @@ model Property {
     propertySubType                     String?
     propertyType                        String?
     publicRemarks                       String?
+    publicSurveyRange                   String?
+    publicSurveySection                 String?
+    publicSurveyTownship                String?
     purchaseContractDate                DateTime?
+    rangeArea                           Float?
+    roadFrontageType                    String[]
+    roadResponsibility                  String[]
+    roadSurfaceType                     String[]
+    roomType                            String[]
     rooms                               String[]
+    roomsTotal                          Int?
     securityFeatures                    String[]
     seniorCommunityYn                   Boolean?
     showingAdvanceNotice                Int?
@@ -273,14 +306,17 @@ model Property {
     streetSuffixModifier                String?
     structureType                       String[]
     subdivisionName                     String?
+    syndicateTo                         String[]
     syndicationRemarks                  String?
     topography                          String?
     township                            String?
     unitNumber                          String?
+    unitTypeType                        String[]
     unitTypes                           String[]
     universalPropertyId                 String?
     universalPropertySubId              String?
     unparsedAddress                     String?
+    vegetation                          String[]
     view                                String[]
     viewYn                              Boolean?
     virtualTourUrlUnbranded             String?
@@ -289,6 +325,7 @@ model Property {
     waterfrontYn                        Boolean?
     windowFeatures                      String[]
     withdrawnDate                       DateTime?
+    woodedArea                          Float?
     yearBuilt                           Int?
 
     media Media[]
@@ -302,7 +339,7 @@ model Media {
     changedByMemberKey        String?
     changedByMemberKeyNumeric Int?
     imageOf                   String?
-    mediaKey                  String?
+    mediaKey                  String?   @unique
     mediaKeyNumeric           Int?
     mediaObjectId             String?
     mediaUrl                  String?
@@ -317,9 +354,9 @@ model Media {
     resourceRecordKeyNumeric  Int?
     sourceSystemId            String?
 
+    /// @proto3({ "ignore": true })
     propertyId String
     property   Property @relation(fields: [propertyId], references: [id])
 
-    @@unique([order, resourceRecordKey])
     @@map("media")
 }

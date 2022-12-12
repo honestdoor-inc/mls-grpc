@@ -20,6 +20,9 @@
   "dependencies": {
     "@grpc/grpc-js": "^1.8.0",
     "@honestdoor/proto-ts": "*",
-    "database": "*"
+    "bullmq": "^3.4.1",
+    "cuid": "^2.1.8",
+    "database": "*",
+    "ioredis": "^5.2.4"
   }
 }

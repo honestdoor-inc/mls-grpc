@@ -1,20 +1,16 @@
 import * as grpc from "@grpc/grpc-js";
 
-import { CollectionOfProperty, filterBuilder } from "reso-client";
-import { MLSClient, UpsertPropertyRequest } from "@honestdoor/proto-ts";
+import { MLSClient, UpsertPropertiesRequest } from "@honestdoor/proto-ts";
 
-import { Keys } from "helpers/transforms";
 import { fetcher } from "./fetcher";
-import { pipe } from "fp-ts/lib/function";
-import { propertyApi } from "./client";
 import { transformer } from "./transformer";
 
 const { RPC_SERVER_URL } = process.env;
 
 const client = new MLSClient(RPC_SERVER_URL as string, grpc.ChannelCredentials.createInsecure());
 
-const MAX = 50;
-const BATCH_SIZE = 1;
+// const MAX = 1000;
+const BATCH_SIZE = 100;
 
 interface Replicator<T> {
   fetcher: (ctx: T) => Promise<{ ctx: T; data: any[] | null }>;
@@ -22,7 +18,10 @@ interface Replicator<T> {
   onBatchComplete?: (ctx: T, data: any[]) => T;
 }
 
-async function replicate<T>(replicator: Replicator<T>, ctx: T) {
+async function replicate<T>(
+  replicator: Replicator<T>,
+  ctx: T extends { [key: string]: any } ? T : never
+) {
   const { ctx: nextCtx, data } = await replicator.fetcher(ctx);
 
   if (!data?.length) return;
@@ -35,20 +34,16 @@ async function replicate<T>(replicator: Replicator<T>, ctx: T) {
     return acc;
   }, [] as any[]);
 
-  console.dir(transformed, { depth: null });
+  const request = UpsertPropertiesRequest.fromPartial({
+    properties: transformed,
+  });
 
-  // const request = UpsertPropertyRequest.fromPartial({
-  //   property: transformed[0],
-  // });
-
-  // client.upsertProperty(request, (err, res) => {
-  //   if (err) {
-  //     console.log(err);
-  //     return;
-  //   }
-
-  //   console.log(res);
-  // });
+  client.upsertProperties(request, (err, res) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+  });
 
   // replicate(replicator, nextCtx);
 }
@@ -56,11 +51,13 @@ async function replicate<T>(replicator: Replicator<T>, ctx: T) {
 export interface Context {
   sent: number;
   nextLink: string | null;
+  batchSize: number;
 }
 
 const initialContext: Context = {
   sent: 0,
   nextLink: null,
+  batchSize: BATCH_SIZE,
 };
 
 replicate<Context>(
