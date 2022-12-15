@@ -1,47 +1,63 @@
 import { Job, Queue, Worker } from "bullmq";
 import { Media, Property } from "@honestdoor/proto-ts/out/proto/generated";
 
+import { Media as PMedia } from "database";
+import { defaultOptions } from "./connection";
+import { geocodeQueue } from "./geocode";
+import { logger } from "../logger";
+import { mediaQueue } from "./media";
 import { prisma } from "../clients/prisma";
-import { withDefaultOpts } from "./connection";
 
-export const propertyQueue = new Queue("property", withDefaultOpts({}));
+export const propertyQueue = new Queue<Property>("property", {
+  ...defaultOptions,
+  defaultJobOptions: {
+    removeOnComplete: true,
+  },
+});
 
-export const propertyWorker = new Worker("property", propertyHandler, withDefaultOpts({}));
+export const propertyWorker = new Worker("property", propertyHandler, {
+  ...defaultOptions,
+  concurrency: 5,
+});
 
-export async function propertyHandler(job: Job<Omit<Property, "media">>) {
-  const children = await job.getChildrenValues();
-  const media: Media[] = children[`bull:media:${job.id!!}`];
+function getNewMedia(a: PMedia[], b: Media[]): Media[] {
+  return b.reduce((acc, curr) => {
+    const match = a.find((m) => m.mediaKey === curr.mediaKey);
 
-  const property = job.data;
+    if (!match) {
+      acc.push(curr);
+    }
 
-  try {
-    await prisma.property.upsert({
-      where: { listingKey: property.listingKey },
-      create: {
-        ...property,
-        media: {
-          createMany: {
-            data: media,
-            skipDuplicates: true,
-          },
-        },
-      },
-      update: {
-        ...property,
-        media: {
-          upsert: media.map((m) => ({
-            where: { mediaKey: m.mediaKey },
-            create: m,
-            update: m,
-          })),
-        },
-      },
-    });
-  } catch (error) {
-    console.log(error);
+    return acc;
+  }, [] as Media[]);
+}
+
+export async function propertyHandler(job: Job<Property>) {
+  const { data } = job;
+
+  const property = { ...data, media: undefined };
+
+  const response = await prisma.property.upsert({
+    where: { listingKey: data.listingKey },
+    create: property,
+    update: property,
+    include: { media: true },
+  });
+
+  if (data.media?.length) {
+    const newMedia = getNewMedia(response.media, data.media);
+
+    if (newMedia.length) {
+      await mediaQueue.add("media", { propertyId: response.id, media: newMedia });
+    }
   }
 
-  console.log(`Processed property ${property.listingKey}`);
+  if (!response.latitude || !response.longitude) {
+    const { id, unparsedAddress, city, stateOrProvince, postalCode } = response;
+    await geocodeQueue.add("geocode", { id, unparsedAddress, city, stateOrProvince, postalCode });
+  }
+
+  logger.log({ level: "info", message: `Processed property ${response.id}` });
 
   return "OK";
 }

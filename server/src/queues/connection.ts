@@ -5,12 +5,6 @@ export const connectionOpts: ConnectionOptions = {
   port: parseInt(process.env.REDIS_PORT as string),
 };
 
-export function withDefaultOpts<T extends QueueOptions>(
-  opts: T
-): T & { connection: ConnectionOptions } {
-  return {
-    ...opts,
-    connection: connectionOpts,
-    defaultJobOptions: { removeOnComplete: true },
-  };
-}
+export const defaultOptions: QueueOptions = {
+  connection: connectionOpts,
+};

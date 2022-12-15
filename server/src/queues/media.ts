@@ -1,23 +1,58 @@
 import { Job, Queue, Worker } from "bullmq";
 
 import { Media } from "@honestdoor/proto-ts/out/proto/generated";
+import { defaultOptions } from "./connection";
+import { logger } from "../logger";
 import { prisma } from "../clients/prisma";
-import { withDefaultOpts } from "./connection";
+import { uploadImage } from "../funcs";
 
-export const mediaQueue = new Queue("media", withDefaultOpts({}));
+type MediaQueueData = {
+  propertyId: string;
+  media: Media[];
+};
 
-export const mediaWorker = new Worker("media", mediaHandler, withDefaultOpts({}));
+export const mediaQueue = new Queue<MediaQueueData>("media", {
+  ...defaultOptions,
+  defaultJobOptions: {
+    removeOnComplete: true,
+  },
+});
 
-export async function mediaHandler(job: Job<Media[]>): Promise<Media[]> {
-  console.log(`Processing media for property ${job.parent?.id}`);
+export const mediaWorker = new Worker("media", mediaHandler, {
+  ...defaultOptions,
+  concurrency: 5,
+});
 
-  const media = job.data;
+export async function mediaHandler(job: Job<MediaQueueData>) {
+  const { propertyId, media } = job.data;
 
-  if (!media?.length) return [];
+  if (!media.length) return;
 
-  for (const m of media) {
-    m.mediaUrl = "https://www.test.com";
-  }
+  const nMedia = await Promise.all(
+    media.map(async (m) => {
+      if (m.mediaUrl) {
+        const upload = await uploadImage(m);
 
-  return media;
+        if (upload) {
+          m.mediaUrl = `https://cdn.honestdoor.com/${upload.Key}`;
+
+          return m;
+        }
+      }
+
+      return m;
+    })
+  );
+
+  await prisma.media.createMany({
+    data: nMedia.map((m) => ({
+      propertyId,
+      ...m,
+    })),
+    skipDuplicates: true,
+  });
+
+  logger.log({ level: "info", message: `Processed media for property ${propertyId}` });
+
+  return "OK";
 }

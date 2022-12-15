@@ -6,23 +6,30 @@
   "scripts": {
     "with-env": "dotenv -e ../.env --",
     "clean": "rm -rf .turbo node_modules",
-    "dev": "pnpm with-env ts-node ./src/index.ts --watch"
+    "dev": "pnpm with-env ts-node ./src/index.ts --watch",
+    "test-img": "pnpm with-env ts-node ./src/funcs/imageUpload.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/mime-types": "^2.1.1",
     "@types/node": "^18.11.11",
     "dotenv-cli": "^6.0.0",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.3"
   },
   "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.3.16",
     "@grpc/grpc-js": "^1.8.0",
     "@honestdoor/proto-ts": "*",
+    "aws-sdk": "^2.1275.0",
+    "axios": "^1.2.1",
     "bullmq": "^3.4.1",
     "cuid": "^2.1.8",
     "database": "*",
-    "ioredis": "^5.2.4"
+    "ioredis": "^5.2.4",
+    "mime-types": "^2.1.35",
+    "winston": "^3.8.2"
   }
 }

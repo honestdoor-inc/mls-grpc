@@ -1,10 +1,9 @@
-import "./queues/property";
-import "./queues/media";
-
 import * as grpc from "@grpc/grpc-js";
 
 import { MLSServer, MLSService } from "@honestdoor/proto-ts";
-import { createPropertiesFlow, createPropertyFlow } from "./queues/flows";
+
+import { logger } from "./logger";
+import { propertyQueue } from "./queues/property";
 
 const { RPC_SERVER_URL } = process.env;
 
@@ -14,9 +13,9 @@ const mlsOptsService: MLSServer = {
 
     if (!property) return callback(new Error("Property is required"), { success: false });
 
-    const propertyFlow = await createPropertyFlow(property);
+    const job = await propertyQueue.add(property.listingKey!!, property);
 
-    if (!propertyFlow.job)
+    if (!job.id)
       return callback(new Error("Failed to create property flow"), {
         success: false,
       });
@@ -28,9 +27,11 @@ const mlsOptsService: MLSServer = {
 
     if (!properties) return callback(new Error("Properties are required"), { success: false });
 
-    const propertiesFlow = await createPropertiesFlow(properties);
+    const jobs = await propertyQueue.addBulk(
+      properties.map((p) => ({ name: p.listingKey!!, data: p }))
+    );
 
-    if (!propertiesFlow.length)
+    if (!jobs.length)
       return callback(new Error("Failed to create properties flow"), {
         success: false,
       });
@@ -52,7 +53,7 @@ async function startServer() {
         console.error(err);
       }
 
-      console.log(`Server running on port ${port}`);
+      logger.log({ level: "info", message: `Server running on port ${port}` });
 
       server.start();
     }

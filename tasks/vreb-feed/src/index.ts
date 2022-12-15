@@ -10,7 +10,7 @@ const { RPC_SERVER_URL } = process.env;
 const client = new MLSClient(RPC_SERVER_URL as string, grpc.ChannelCredentials.createInsecure());
 
 // const MAX = 1000;
-const BATCH_SIZE = 100;
+const BATCH_SIZE = 50;
 
 interface Replicator<T> {
   fetcher: (ctx: T) => Promise<{ ctx: T; data: any[] | null }>;
