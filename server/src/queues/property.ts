@@ -20,18 +20,6 @@ export const propertyWorker = new Worker("property", propertyHandler, {
   concurrency: 5,
 });
 
-function getNewMedia(a: PMedia[], b: Media[]): Media[] {
-  return b.reduce((acc, curr) => {
-    const match = a.find((m) => m.mediaKey === curr.mediaKey);
-
-    if (!match) {
-      acc.push(curr);
-    }
-
-    return acc;
-  }, [] as Media[]);
-}
-
 export async function propertyHandler(job: Job<Property>) {
   const { data } = job;
 
@@ -45,7 +33,7 @@ export async function propertyHandler(job: Job<Property>) {
   });
 
   if (data.media?.length) {
-    const newMedia = getNewMedia(response.media, data.media);
+    const newMedia = filterNewMedia(response.media, data.media);
 
     if (newMedia.length) {
       await mediaQueue.add("media", { propertyId: response.id, media: newMedia });
@@ -60,4 +48,16 @@ export async function propertyHandler(job: Job<Property>) {
   logger.log({ level: "info", message: `Processed property ${response.id}` });
 
   return "OK";
+}
+
+function filterNewMedia(a: PMedia[], b: Media[]): Media[] {
+  return b.reduce((acc, curr) => {
+    const match = a.find((m) => m.mediaKey === curr.mediaKey);
+
+    if (!match) {
+      acc.push(curr);
+    }
+
+    return acc;
+  }, [] as Media[]);
 }

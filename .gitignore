@@ -41,3 +41,5 @@ cli/libturbo.h
 
 **/generated
 **/out
+
+.data

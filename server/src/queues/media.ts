@@ -4,7 +4,9 @@ import { Media } from "@honestdoor/proto-ts/out/proto/generated";
 import { defaultOptions } from "./connection";
 import { logger } from "../logger";
 import { prisma } from "../clients/prisma";
-import { uploadImage } from "../funcs";
+import { uploadImage } from "../utils";
+
+const isDev = process.env.NODE_ENV === "development";
 
 type MediaQueueData = {
   propertyId: string;
@@ -27,6 +29,19 @@ export async function mediaHandler(job: Job<MediaQueueData>) {
   const { propertyId, media } = job.data;
 
   if (!media.length) return;
+
+  // Skip s3 upload in development
+  if (isDev) {
+    await prisma.media.createMany({
+      data: media.map((m) => ({
+        propertyId,
+        ...m,
+      })),
+      skipDuplicates: true,
+    });
+
+    return "OK";
+  }
 
   const nMedia = await Promise.all(
     media.map(async (m) => {

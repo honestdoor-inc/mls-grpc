@@ -7,6 +7,8 @@ import { gmapsClient } from "../clients/google";
 import { logger } from "../logger";
 import { prisma } from "../clients/prisma";
 
+const isDev = process.env.NODE_ENV === "development";
+
 type GeocodeQueueData = Required<
   Pick<Property, "id" | "unparsedAddress" | "city" | "stateOrProvince" | "postalCode">
 >;
@@ -30,6 +32,8 @@ export const geocodeWorker = new Worker("geocode", geocodeHandler, {
 });
 
 export async function geocodeHandler(job: Job<GeocodeQueueData>) {
+  if (isDev) return;
+
   try {
     const { id, unparsedAddress, city, stateOrProvince, postalCode } = job.data;
 
