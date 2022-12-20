@@ -16,6 +16,7 @@ importers:
     specifiers:
       '@prisma/client': latest
       '@types/node': ^18.11.17
+      dotenv-cli: ^6.0.0
       prisma: latest
       prisma-json-schema-generator: ^3.1.1
       zod: ^3.19.1
@@ -26,6 +27,7 @@ importers:
       zod-prisma: github.com/testerez/zod-prisma/af58a17a6bf1277fc504e92a9cf15902fc2b786c_prisma@4.8.0+zod@3.20.2
     devDependencies:
       '@types/node': 18.11.17
+      dotenv-cli: 6.0.0
       prisma: 4.8.0
       prisma-json-schema-generator: 3.1.1
 
