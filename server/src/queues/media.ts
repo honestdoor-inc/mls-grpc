@@ -3,7 +3,7 @@ import { Prisma, prisma } from "@hd/db";
 
 import { defaultOptions } from "./connection";
 import { logger } from "../logger";
-import { uploadImage } from "../@hd/utils";
+import { uploadImage } from "../utils";
 
 const isDev = process.env.NODE_ENV === "development";
 
