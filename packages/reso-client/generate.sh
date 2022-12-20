@@ -11,9 +11,9 @@ if [ -f $FILE_OUT ]; then
   rm $FILE_OUT
 fi
 
-if [ -d $OUT_PATH ]; then
-  rm -rf $OUT_PATH
-fi
+# if [ -d $OUT_PATH ]; then
+#   rm -rf $OUT_PATH
+# fi
 
 
 # Download the file and save it to the output path

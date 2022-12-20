@@ -1,8 +1,8 @@
-import { CollectionOfProperty, OrgResoMetadataProperty, filterBuilder } from "reso-client";
-import { PropertyApi, replicationInterceptor } from "reso-client";
+import { CollectionOfProperty, OrgResoMetadataProperty, filterBuilder } from "@hd/reso-client";
+import { PropertyApi, replicationInterceptor } from "@hd/reso-client";
 
 import Axios from "axios";
-import { Context } from "./";
+import { Context } from ".";
 
 const { VREB_ENDPOINT, VREB_ACCESS_TOKEN } = process.env;
 

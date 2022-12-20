@@ -1,16 +1,10 @@
-import * as grpc from "@grpc/grpc-js";
-
-import { MLSClient, UpsertPropertiesRequest } from "@honestdoor/proto-ts";
-
 import { fetcher } from "./fetcher";
 import { transformer } from "./transformer";
-
-const { RPC_SERVER_URL } = process.env;
-
-const client = new MLSClient(RPC_SERVER_URL as string, grpc.ChannelCredentials.createInsecure());
+import { trpc } from "@hd/server";
+import { zod } from "@hd/db";
 
 // const MAX = 1000;
-const BATCH_SIZE = 50;
+const BATCH_SIZE = 10;
 
 interface Replicator<T> {
   fetcher: (ctx: T) => Promise<{ ctx: T; data: any[] | null }>;
@@ -28,24 +22,21 @@ async function replicate<T>(
 
   const transformed = data.reduce((acc, item) => {
     const transformed = replicator.transformer(nextCtx, item);
+    const parsed = zod.propertySchema.partial().safeParse(transformed);
 
-    if (transformed) acc.push(transformed);
+    if (!parsed.success) {
+      console.dir(parsed.error.errors, { depth: null });
+      return acc;
+    }
+
+    acc.push(parsed.data);
 
     return acc;
   }, [] as any[]);
 
-  const request = UpsertPropertiesRequest.fromPartial({
-    properties: transformed,
-  });
+  await trpc.property.upsertMany.mutate(transformed);
 
-  client.upsertProperties(request, (err, res) => {
-    if (err) {
-      console.log(err);
-      return;
-    }
-  });
-
-  // replicate(replicator, nextCtx);
+  // replicate(replicator, nextCtx as T);
 }
 
 export interface Context {

@@ -10,7 +10,7 @@ function formatDate(keys: string[]) {
 
     return Object.keys(obj).reduce((acc: any, key) => {
       if (keys.includes(key)) {
-        acc[key] = new Date(obj[key]).toISOString();
+        acc[key] = new Date(obj[key]);
       } else {
         acc[key] = formatDate(keys)(obj[key]);
       }

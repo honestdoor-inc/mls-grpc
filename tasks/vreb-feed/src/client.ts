@@ -1,4 +1,4 @@
-import { PropertyApi, replicationInterceptor } from "reso-client";
+import { PropertyApi, replicationInterceptor } from "@hd/reso-client";
 
 import Axios from "axios";
 

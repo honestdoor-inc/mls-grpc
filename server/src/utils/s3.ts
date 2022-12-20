@@ -1,7 +1,7 @@
 import * as AWS from "aws-sdk";
 
 import Axios from "axios";
-import { Media } from "@honestdoor/proto-ts/out/proto/generated";
+import { Prisma } from "@hd/db";
 import mime from "mime-types";
 
 const s3 = new AWS.S3({
@@ -28,7 +28,7 @@ export async function downloadImageStream(url: string) {
   return Buffer.from(response.data, "binary");
 }
 
-export async function uploadImage(media: Media) {
+export async function uploadImage(media: Prisma.MediaCreateInput) {
   const { mediaUrl, resourceRecordKey, mediaObjectId } = media;
 
   if (!mediaUrl) return;

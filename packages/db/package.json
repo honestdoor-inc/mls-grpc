@@ -1,5 +1,5 @@
 {
-  "name": "database",
+  "name": "@hd/db",
   "version": "1.0.0",
   "description": "",
   "main": "./index.ts",
@@ -19,8 +19,8 @@
     "zod-prisma": "github:testerez/zod-prisma"
   },
   "devDependencies": {
+    "@types/node": "^18.11.17",
     "prisma": "latest",
-    "prisma-json-schema-generator": "^3.1.1",
-    "prisma-generator-proto3": "*"
+    "prisma-json-schema-generator": "^3.1.1"
   }
 }

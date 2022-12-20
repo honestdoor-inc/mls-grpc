@@ -1,16 +1,15 @@
 import { Job, Queue, Worker } from "bullmq";
+import { Prisma, prisma } from "@hd/db";
 
-import { Media } from "@honestdoor/proto-ts/out/proto/generated";
 import { defaultOptions } from "./connection";
 import { logger } from "../logger";
-import { prisma } from "../clients/prisma";
-import { uploadImage } from "../utils";
+import { uploadImage } from "../@hd/utils";
 
 const isDev = process.env.NODE_ENV === "development";
 
 type MediaQueueData = {
   propertyId: string;
-  media: Media[];
+  media: Prisma.MediaCreateInput[];
 };
 
 export const mediaQueue = new Queue<MediaQueueData>("media", {

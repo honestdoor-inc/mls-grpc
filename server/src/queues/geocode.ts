@@ -1,11 +1,12 @@
 import { Job, Queue, Worker } from "bullmq";
+import { Property, prisma } from "@hd/db";
 
+import { Client } from "@googlemaps/google-maps-services-js";
 import { LocationType } from "@googlemaps/google-maps-services-js";
-import { Property } from "database";
 import { defaultOptions } from "./connection";
-import { gmapsClient } from "../clients/google";
 import { logger } from "../logger";
-import { prisma } from "../clients/prisma";
+
+export const gmapsClient = new Client({});
 
 const isDev = process.env.NODE_ENV === "development";
 

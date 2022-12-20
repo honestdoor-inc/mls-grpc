@@ -14,7 +14,7 @@ generator zod {
     modelCase             = "camelCase"
     modelSuffix           = "Schema"
     useDecimalJs          = true
-    prismaJsonNullability = false
+    prismaJsonNullability = true
 }
 
 generator jsonSchema {
@@ -24,11 +24,6 @@ generator jsonSchema {
     schemaId                 = "some-schema-id"
     includeRequiredFields    = "true"
     persistOriginalType      = "true"
-}
-
-generator proto3 {
-    provider = "prisma-generator-proto3"
-    output   = "../generated/proto"
 }
 
 model Property {
@@ -354,7 +349,6 @@ model Media {
     resourceRecordKeyNumeric  Int?
     sourceSystemId            String?
 
-    /// @proto3({ "ignore": true })
     propertyId String
     property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
 

@@ -1,14 +1,16 @@
 import { Job, Queue, Worker } from "bullmq";
-import { Media, Property } from "@honestdoor/proto-ts/out/proto/generated";
+import { Media, Prisma, prisma } from "@hd/db";
 
-import { Media as PMedia } from "database";
 import { defaultOptions } from "./connection";
 import { geocodeQueue } from "./geocode";
 import { logger } from "../logger";
 import { mediaQueue } from "./media";
-import { prisma } from "../clients/prisma";
 
-export const propertyQueue = new Queue<Property>("property", {
+type PropertyQueueData = Prisma.PropertyCreateInput & {
+  media?: Prisma.MediaCreateInput[];
+};
+
+export const propertyQueue = new Queue<PropertyQueueData>("property", {
   ...defaultOptions,
   defaultJobOptions: {
     removeOnComplete: true,
@@ -20,10 +22,14 @@ export const propertyWorker = new Worker("property", propertyHandler, {
   concurrency: 5,
 });
 
-export async function propertyHandler(job: Job<Property>) {
+export async function propertyHandler(job: Job<PropertyQueueData>) {
   const { data } = job;
 
   const property = { ...data, media: undefined };
+
+  if (!data.listingKey) {
+    return logger.log({ level: "error", message: `Property ${data.id} has no listing key` });
+  }
 
   const response = await prisma.property.upsert({
     where: { listingKey: data.listingKey },
@@ -50,7 +56,7 @@ export async function propertyHandler(job: Job<Property>) {
   return "OK";
 }
 
-function filterNewMedia(a: PMedia[], b: Media[]): Media[] {
+function filterNewMedia(a: Media[], b: Prisma.MediaCreateInput[]): Prisma.MediaCreateInput[] {
   return b.reduce((acc, curr) => {
     const match = a.find((m) => m.mediaKey === curr.mediaKey);
 
@@ -59,5 +65,5 @@ function filterNewMedia(a: PMedia[], b: Media[]): Media[] {
     }
 
     return acc;
-  }, [] as Media[]);
+  }, [] as Prisma.MediaCreateInput[]);
 }
