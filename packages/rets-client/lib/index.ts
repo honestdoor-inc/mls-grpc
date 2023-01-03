@@ -29,7 +29,7 @@ async function main() {
     }, {} as Record<string, string>);
   });
 
-  console.dir(parsed, { depth: null });
+  fs.writeFileSync(path.join(__dirname, "../.data/test.json"), JSON.stringify(parsed, null, 2));
 }
 
 main();

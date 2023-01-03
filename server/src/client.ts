@@ -9,7 +9,7 @@ import crossFetch from "cross-fetch";
 import { transformer } from "./transformer";
 
 const getBaseUrl = () => {
-  return `http://localhost:4000`;
+  return process.env.SERVER_BASE_URL || "http://localhost:4000";
 };
 
 export const trpc = createTRPCProxyClient<AppRouter>({
