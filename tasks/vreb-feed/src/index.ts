@@ -22,21 +22,26 @@ async function replicate<T>(
 
   const transformed = data.reduce((acc, item) => {
     const transformed = replicator.transformer(nextCtx, item);
-    const parsed = zod.propertySchema.partial().safeParse(transformed);
 
-    if (!parsed.success) {
-      console.dir(parsed.error.errors, { depth: null });
+    const property = zod.propertySchema
+      .partial()
+      .required({ board: true })
+      .extend({ media: zod.mediaSchema.partial().array() })
+      .safeParse(transformed);
+
+    if (!property.success) {
+      console.dir(property.error.errors, { depth: null });
       return acc;
     }
 
-    acc.push(parsed.data);
+    acc.push(property.data);
 
     return acc;
   }, [] as any[]);
 
   await trpc.property.upsertMany.mutate(transformed);
 
-  // replicate(replicator, nextCtx as T);
+  replicate(replicator, nextCtx as any);
 }
 
 export interface Context {

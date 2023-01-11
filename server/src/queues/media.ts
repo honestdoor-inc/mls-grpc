@@ -9,7 +9,7 @@ const isDev = process.env.NODE_ENV === "development";
 
 type MediaQueueData = {
   propertyId: string;
-  media: Prisma.MediaCreateInput[];
+  media: Omit<Prisma.MediaCreateInput, "property">[];
 };
 
 export const mediaQueue = new Queue<MediaQueueData>("media", {

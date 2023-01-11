@@ -1,6 +1,6 @@
-export * as zod from "./generated";
-
 import { PrismaClient } from "@prisma/client";
+
+export * as zod from "./generated";
 
 declare global {
   // allow global `var` declarations

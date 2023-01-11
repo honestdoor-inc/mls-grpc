@@ -28,6 +28,7 @@ generator jsonSchema {
 
 model Property {
     id                                  String    @id @unique @default(cuid())
+    board                               Board
     anchorsCoTenants                    String?
     appliances                          String[]
     associationAmenities                String[]
@@ -208,7 +209,7 @@ model Property {
     listingAgreement                    String?
     listingContractDate                 DateTime?
     listingId                           String?
-    listingKey                          String?   @unique
+    listingKey                          String?
     listingKeyNumeric                   Int?
     listingService                      String?
     livingArea                          Float?
@@ -325,6 +326,7 @@ model Property {
 
     media Media[]
 
+    @@unique([board, listingKey])
     @@map("property")
 }
 
@@ -353,4 +355,24 @@ model Media {
     property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
 
     @@map("media")
+}
+
+model SyncEvent {
+    id        String    @id @unique @default(cuid())
+    board     Board
+    syncType  SyncType
+    startedAt DateTime
+    endedAt   DateTime?
+    success   Boolean?
+
+    @@map("sync_event")
+}
+
+enum Board {
+    VIVA
+}
+
+enum SyncType {
+    INITIAL
+    INCREMENTAL
 }

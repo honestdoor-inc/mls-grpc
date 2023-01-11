@@ -28,7 +28,7 @@ export async function downloadImageStream(url: string) {
   return Buffer.from(response.data, "binary");
 }
 
-export async function uploadImage(media: Prisma.MediaCreateInput) {
+export async function uploadImage(media: Omit<Prisma.MediaCreateInput, "property">) {
   const { mediaUrl, resourceRecordKey, mediaObjectId } = media;
 
   if (!mediaUrl) return;

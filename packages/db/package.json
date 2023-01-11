@@ -8,7 +8,7 @@
     "with-env": "dotenv -e ../../.env --",
     "dev": "pnpm with-env prisma studio",
     "db-generate": "pnpm with-env prisma generate",
-    "db-push": "pnpm with-env prisma db push --skip-generate",
+    "db-push": "pnpm with-env prisma db push --skip-generate --force-reset",
     "clean": "rm -rf .turbo node_modules generated"
   },
   "keywords": [],

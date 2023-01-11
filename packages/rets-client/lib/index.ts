@@ -24,7 +24,7 @@ async function main() {
     const values = row.split("\t");
 
     return columns.reduce((acc, column, index) => {
-      acc[column] = values[index];
+      acc[column] = values[index] || "";
       return acc;
     }, {} as Record<string, string>);
   });

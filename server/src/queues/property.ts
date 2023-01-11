@@ -7,7 +7,7 @@ import { logger } from "../logger";
 import { mediaQueue } from "./media";
 
 type PropertyQueueData = Prisma.PropertyCreateInput & {
-  media?: Prisma.MediaCreateInput[];
+  media?: Omit<Prisma.MediaCreateInput, "property">[];
 };
 
 export const propertyQueue = new Queue<PropertyQueueData>("property", {
@@ -32,7 +32,7 @@ export async function propertyHandler(job: Job<PropertyQueueData>) {
   }
 
   const response = await prisma.property.upsert({
-    where: { listingKey: data.listingKey },
+    where: { board_listingKey: { board: data.board, listingKey: data.listingKey } },
     create: property,
     update: property,
     include: { media: true },
@@ -56,7 +56,10 @@ export async function propertyHandler(job: Job<PropertyQueueData>) {
   return "OK";
 }
 
-function filterNewMedia(a: Media[], b: Prisma.MediaCreateInput[]): Prisma.MediaCreateInput[] {
+function filterNewMedia(
+  a: Media[],
+  b: Omit<Prisma.MediaCreateInput, "property">[]
+): Omit<Prisma.MediaCreateInput, "property">[] {
   return b.reduce((acc, curr) => {
     const match = a.find((m) => m.mediaKey === curr.mediaKey);
 
@@ -65,5 +68,5 @@ function filterNewMedia(a: Media[], b: Prisma.MediaCreateInput[]): Prisma.MediaC
     }
 
     return acc;
-  }, [] as Prisma.MediaCreateInput[]);
+  }, [] as Omit<Prisma.MediaCreateInput, "property">[]);
 }
